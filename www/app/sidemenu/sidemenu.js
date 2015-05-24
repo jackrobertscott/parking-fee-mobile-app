@@ -13,7 +13,7 @@
       url: '/app',
       abstract: true,
       templateUrl: 'app/sidemenu/sidemenu.html',
-      controller: 'AppCtrl'
+      controller: 'SidemenuCtrl as vm' // controllerAs does not work with ionic
     });
   }
 })();
