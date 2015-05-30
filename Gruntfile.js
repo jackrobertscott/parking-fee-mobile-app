@@ -21,6 +21,9 @@ module.exports = function (grunt) {
     dist: 'www'
   };
 
+  // Injector for assets
+  grunt.loadNpmTasks('grunt-injector');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -29,12 +32,27 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      injectJS: {
+        files: [
+          '<%= yeoman.client %>/{components,shared}/**/*.js',
+          '!<%= yeoman.client %>/{components,shared}/**/*.spec.js',
+          '!<%= yeoman.client %>/{components,shared}/**/*.mock.js',
+          '!<%= yeoman.client %>/components/app.js'
+        ],
+        tasks: ['injector:scripts']
+      },
+      injectCss: {
+        files: [
+          '<%= yeoman.client %>/{components,shared}/**/*.css'
+        ],
+        tasks: ['injector:css']
+      },
       bower: {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['<%= yeoman.app %>/{components,shared}/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -45,7 +63,7 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        files: ['<%= yeoman.app %>/{components,shared}/{,*/}*.{scss,sass}'],
         tasks: ['compass:server', 'autoprefixer']
       },
       gruntfile: {
@@ -57,8 +75,8 @@ module.exports = function (grunt) {
         },
         files: [
           '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '.tmp/components/{,*/}*.css',
+          '<%= yeoman.app %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
     },
@@ -82,8 +100,8 @@ module.exports = function (grunt) {
                 connect.static('./bower_components')
               ),
               connect().use(
-                '/app/styles',
-                connect.static('./app/styles')
+                '/app/components',
+                connect.static('./app/components')
               ),
               connect.static(appConfig.app)
             ];
@@ -110,6 +128,50 @@ module.exports = function (grunt) {
         options: {
           open: true,
           base: '<%= yeoman.dist %>'
+        }
+      }
+    },
+
+    injector: {
+      options: {
+        // Task-specific options go here.
+      },
+      // Inject application script files into index.html (doesn't include bower)
+      scripts: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/app/', '');
+            filePath = filePath.replace('/.tmp/', '');
+            return '<script src="' + filePath + '"></script>';
+          },
+          starttag: '<!-- injector:js -->',
+          endtag: '<!-- endinjector -->'
+        },
+        files: {
+          '<%= yeoman.app %>/index.html': [
+            '{.tmp,<%= yeoman.app %>}/{components,shared}/**/*.js',
+            '!{.tmp,<%= yeoman.app %>}/components/app.js',
+            '!{.tmp,<%= yeoman.app %>}/{components,shared}/**/*.spec.js',
+            '!{.tmp,<%= yeoman.app %>}/{components,shared}/**/*.mock.js'
+          ]
+        }
+      },
+      // Inject component css into index.html
+      css: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/app/', '');
+            filePath = filePath.replace('/.tmp/', '');
+            return '<link rel="stylesheet" href="' + filePath + '">';
+          },
+          starttag: '<!-- injector:css -->',
+          endtag: '<!-- endinjector -->'
+        },
+        files: {
+          '<%= yeoman.app %>/index.html': [
+            '{.tmp,<%= yeoman.app %>}/{components,shared}/**/*.css',
+            '!{.tmp,<%= yeoman.app %>}/components/app.css'
+          ]
         }
       }
     },
@@ -187,7 +249,7 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/{components,shared}/{,*/}*.js'
         ]
       },
       test: {
@@ -224,17 +286,17 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
+          cwd: '.tmp/components/',
           src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          dest: '.tmp/components/'
         }]
       },
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/styles/',
+          cwd: '.tmp/components/',
           src: '{,*/}*.css',
-          dest: '.tmp/styles/'
+          dest: '.tmp/components/'
         }]
       }
     },
@@ -262,7 +324,7 @@ module.exports = function (grunt) {
         }
       },
       sass: {
-        src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+        src: ['<%= yeoman.app %>/{components,shared}/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
     },
@@ -270,23 +332,23 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
-        sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
-        generatedImagesDir: '.tmp/images/generated',
-        imagesDir: '<%= yeoman.app %>/images',
-        javascriptsDir: '<%= yeoman.app %>/scripts',
-        fontsDir: '<%= yeoman.app %>/styles/fonts',
+        sassDir: '<%= yeoman.app %>/{components,shared}',
+        cssDir: '.tmp/components',
+        generatedImagesDir: '.tmp/assets/generated',
+        imagesDir: '<%= yeoman.app %>/assets',
+        javascriptsDir: '<%= yeoman.app %>/{components,shared}',
+        fontsDir: '<%= yeoman.app %>/{components,shared}/fonts',
         importPath: './bower_components',
-        httpImagesPath: '/images',
-        httpGeneratedImagesPath: '/images/generated',
-        httpFontsPath: '/styles/fonts',
+        httpImagesPath: '/assets',
+        httpGeneratedImagesPath: '/assets/generated',
+        httpFontsPath: '/components/fonts',
         relativeAssets: false,
         assetCacheBuster: false,
         raw: 'Sass::Script::Number.precision = 10\n'
       },
       dist: {
         options: {
-          generatedImagesDir: '<%= yeoman.dist %>/images/generated'
+          generatedImagesDir: '<%= yeoman.dist %>/assets/generated'
         }
       },
       server: {
@@ -300,10 +362,10 @@ module.exports = function (grunt) {
     filerev: {
       dist: {
         src: [
-          '<%= yeoman.dist %>/scripts/{,*/}*.js',
-          '<%= yeoman.dist %>/styles/{,*/}*.css',
-          '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          '<%= yeoman.dist %>/{components,shared}/{,*/}*.js',
+          '<%= yeoman.dist %>/{components,shared}/{,*/}*.css',
+          '<%= yeoman.dist %>/assets/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          '<%= yeoman.dist %>/{components,shared}/fonts/*'
         ]
       }
     },
@@ -330,12 +392,12 @@ module.exports = function (grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      css: ['<%= yeoman.dist %>/{components,shared}/{,*/}*.css'],
       options: {
         assetsDirs: [
           '<%= yeoman.dist %>',
-          '<%= yeoman.dist %>/images',
-          '<%= yeoman.dist %>/styles'
+          '<%= yeoman.dist %>/assets',
+          '<%= yeoman.dist %>/{components,shared}'
         ]
       }
     },
@@ -347,8 +409,8 @@ module.exports = function (grunt) {
     // cssmin: {
     //   dist: {
     //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
+    //       '<%= yeoman.dist %>/{components,shared}/app.css': [
+    //         '.tmp/components/{,*/}*.css'
     //       ]
     //     }
     //   }
@@ -356,8 +418,8 @@ module.exports = function (grunt) {
     // uglify: {
     //   dist: {
     //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
+    //       '<%= yeoman.dist %>/{components,shared}/scripts.js': [
+    //         '<%= yeoman.dist %>/{components,shared}/scripts.js'
     //       ]
     //     }
     //   }
@@ -370,9 +432,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/assets',
           src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>/assets'
         }]
       }
     },
@@ -381,9 +443,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%= yeoman.app %>/images',
+          cwd: '<%= yeoman.app %>/assets',
           src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
+          dest: '<%= yeoman.dist %>/assets'
         }]
       }
     },
@@ -412,9 +474,9 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
+          cwd: '.tmp/concat',
           src: '*.js',
-          dest: '.tmp/concat/scripts'
+          dest: '.tmp/concat'
         }]
       }
     },
@@ -438,21 +500,21 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            '{components,shared}/{,*/}*.html',
+            'assets/{,*/}*.{webp}',
+            '{components,shared}/fonts/{,*/}*.*'
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
+          cwd: '.tmp/assets',
+          dest: '<%= yeoman.dist %>/assets',
           src: ['generated/*']
         }]
       },
       styles: {
         expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
+        cwd: '<%= yeoman.app %>/{components,shared}',
+        dest: '.tmp/components/',
         src: '{,*/}*.css'
       }
     },
@@ -489,6 +551,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'injector',
       'wiredep',
       'concurrent:server',
       'autoprefixer:server',
@@ -504,6 +567,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'injector',
     'wiredep',
     'concurrent:test',
     'autoprefixer',
@@ -515,6 +579,7 @@ module.exports = function (grunt) {
     if( target === ''){
       grunt.task.run([
         'clean:dist',
+        'injector',
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
@@ -533,6 +598,7 @@ module.exports = function (grunt) {
     if( target === 'ios'){
       grunt.task.run([
         'clean:dist',
+        'injector',
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
@@ -552,6 +618,7 @@ module.exports = function (grunt) {
     if( target === 'android'){
       grunt.task.run([
         'clean:dist',
+        'injector',
         'wiredep',
         'useminPrepare',
         'concurrent:dist',
@@ -586,6 +653,7 @@ module.exports = function (grunt) {
   // // Replaced by cordova incorporating functions
   // grunt.registerTask('build', [
   //   'clean:dist',
+  //   'injector',
   //   'wiredep',
   //   'useminPrepare',
   //   'concurrent:dist',

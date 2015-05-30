@@ -9,14 +9,11 @@
 
   function config($stateProvider) {
     $stateProvider
-    .state('app.example', {
-      url: '/example',
-      views: {
-        'screen': {
-          templateUrl: 'app/template/template.html',
-          controller: 'TemplateCtrl'
-        }
-      }
+    .state('app', {
+      url: '/app',
+      abstract: true,
+      templateUrl: 'components/sidemenu/sidemenu.html',
+      controller: 'SidemenuCtrl as vm' // controllerAs does not work with ionic
     });
   }
 })();
