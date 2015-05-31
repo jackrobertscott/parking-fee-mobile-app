@@ -437,6 +437,7 @@ module.exports = function (grunt) {
             '!<%= yeoman.app %>/shared/data-services/data-services.js',
             '!<%= yeoman.app %>/shared/auth/auth.js',
             '!<%= yeoman.app %>/scripts/app.js',
+            '!<%= yeoman.app %>/scripts/config.js',
             '!<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.spec.js',
             '!<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.mock.js',
           ],
