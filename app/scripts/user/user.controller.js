@@ -14,6 +14,7 @@
     vm.register = register;
     vm.login = login;
     vm.changePassword = changePassword;
+    vm.update = update;
 
     activate();
 
@@ -32,6 +33,11 @@
     }
 
     function changePassword() {
+      $state.go('app.example');
+      // code...
+    }
+
+    function update() {
       $state.go('app.example');
       // code...
     }
