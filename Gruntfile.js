@@ -161,7 +161,7 @@ module.exports = function (grunt) {
       }
     },
 
-    
+
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
       options: {
@@ -190,7 +190,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
@@ -410,6 +410,38 @@ module.exports = function (grunt) {
           dest: '.temp/concat/<%= yeoman.scripts %>'
         }]
       }
+    },
+
+    // Inject scripts and styles
+    injector: {
+      options: {
+      },
+      scripts: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/app/', '');
+            return '<script src="'+filePath+'"></script>';
+          }
+        },
+        files: {
+          '<%= yeoman.app %>/index.html': [
+            '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'
+          ],
+        }
+      },
+      styles: {
+        options: {
+          transform: function(filePath) {
+            filePath = filePath.replace('/app/', '');
+            return '<link rel="stylesheet" href="'+filePath+'">';
+          }
+        },
+        files: {
+          '<%= yeoman.app %>/index.html': [
+            '<%= yeoman.app %>/<%= yeoman.styles %>/**/*.css'
+          ],
+        }
+      }
     }
 
   });
@@ -525,6 +557,7 @@ module.exports = function (grunt) {
   grunt.registerTask('init', [
     'clean',
     'ngconstant:development',
+    'injector',
     'wiredep',
     'concurrent:server',
     'autoprefixer',
@@ -536,6 +569,7 @@ module.exports = function (grunt) {
   grunt.registerTask('compress', [
     'clean',
     'ngconstant:production',
+    'injector',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -549,12 +583,13 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('coverage', 
+  grunt.registerTask('coverage',
     ['karma:continuous',
     'connect:coverage:keepalive'
   ]);
 
   grunt.registerTask('default', [
+    'injector',
     'wiredep',
     'newer:jshint',
     'karma:continuous',
