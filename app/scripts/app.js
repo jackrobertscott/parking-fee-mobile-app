@@ -3,7 +3,10 @@
 
   angular
   .module('mobileApp', [
-    'ionic'
+    'ionic',
+    'config',
+    'auth',
+    'dataServices'
   ])
   .config(config)
   .run(run);
