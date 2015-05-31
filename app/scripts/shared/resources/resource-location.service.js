@@ -8,7 +8,7 @@
   ResourceLocation.$inject = ['$resource', 'ENV'];
 
   function ResourceLocation($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'/api/locations/:id/:action', {
+    return $resource(ENV.apiEndpoint+'api/locations/:id/:action', {
       id: '@_id'
     }, {
       update: {

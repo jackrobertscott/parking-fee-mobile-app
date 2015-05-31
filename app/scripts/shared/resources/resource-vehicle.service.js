@@ -8,7 +8,7 @@
   ResourceVehicle.$inject = ['$resource', 'ENV'];
 
   function ResourceVehicle($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'/api/vehicles/:id/:action', {
+    return $resource(ENV.apiEndpoint+'api/vehicles/:id/:action', {
       id: '@_id'
     }, {
       update: {

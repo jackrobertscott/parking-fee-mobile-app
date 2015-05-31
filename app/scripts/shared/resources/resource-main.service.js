@@ -8,7 +8,7 @@
   ResourceMain.$inject = ['$resource', 'ENV'];
 
   function ResourceMain($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'/api/mains/:id/:action', {
+    return $resource(ENV.apiEndpoint+'api/mains/:id/:action', {
       id: '@_id'
     }, {
       update: {
