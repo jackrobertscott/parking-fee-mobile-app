@@ -20,10 +20,10 @@
 
     function sidemenu() {
       return [
+        new SidemenuItem('Register', 'app.register'),
+        new SidemenuItem('Login', 'app.login'),
+        new SidemenuItem('Change Password', 'app.password'),
         new SidemenuItem('Example', 'app.example'),
-        new SidemenuItem('Login'),
-        new SidemenuItem(),
-        new SidemenuItem(),
         new SidemenuItem()
       ];
     }
