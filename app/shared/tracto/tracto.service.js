@@ -19,7 +19,7 @@
 
     function handle(err) {
       console.log(err);
-      if (err.message) {
+      if (err && err.message) {
         service.bad = 'Error: '+err.message;
       } else {
         service.bad = 'An error has occurred. We apologize for this inconvenience.';

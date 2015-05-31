@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://dev.yoursite.com:10000/'
+            apiEndpoint: 'http://localhost:9000/'
           }
         }
       },
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       },
       coverage: {
         options: {
-          port: 9002,
+          port: 8002,
           open: true,
           base: ['coverage']
         }

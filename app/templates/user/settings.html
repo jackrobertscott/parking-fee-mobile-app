@@ -1,14 +1,14 @@
 <ion-view view-title="Register">
   <ion-content>
-    <form ng-submit="vm.update()">
+    <form ng-init="vm.getOne()" ng-submit="vm.update()">
       <div class="list">
         <label class="item item-input">
           <span class="input-label">Name</span>
-          <input type="text" ng-model="user.name">
+          <input type="text" ng-model="vm.user.name">
         </label>
         <label class="item item-input">
           <span class="input-label">Phone</span>
-          <input type="text" ng-model="user.phone">
+          <input type="text" ng-model="vm.user.phone">
         </label>
         <label class="item">
           <button class="button button-block button-positive" type="submit">Register</button>
