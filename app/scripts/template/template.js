@@ -14,7 +14,7 @@
       views: {
         'screen': {
           templateUrl: 'templates/template/template.html',
-          controller: 'TemplateCtrl' // controllerAs does not work with ionic
+          controller: 'TemplateCtrl as vm' // controllerAs does not work with ionic
         }
       }
     });

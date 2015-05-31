@@ -5,9 +5,9 @@
   .module('mobileApp')
   .controller('UserCtrl', UserCtrl);
 
-  UserCtrl.$inject = [];
+  UserCtrl.$inject = ['$state'];
 
-  function UserCtrl() {
+  function UserCtrl($state) {
     var vm = this;
 
     vm.user = {};
@@ -22,14 +22,17 @@
     }
 
     function register() {
+      $state.go('app.example');
       // code...
     }
 
     function login() {
+      $state.go('app.example');
       // code...
     }
 
     function changePassword() {
+      $state.go('app.example');
       // code...
     }
   }

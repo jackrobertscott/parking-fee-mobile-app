@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: 'app',
-      scripts: 'scripts',
+      scripts: '{scripts,shared}',
       styles: 'styles',
       images: 'images',
       test: 'test',
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         space: '  ',
         wrap: '"use strict";\n\n {%= __ngModule %}',
         name: 'config',
-        dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/config.js'
+        dest: '<%= yeoman.app %>/scripts/config.js'
       },
       development: {
         constants: {
@@ -425,7 +425,20 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.app %>/index.html': [
-            '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'
+            '<%= yeoman.app %>/shared/socket/**/*.js',
+            '<%= yeoman.app %>/shared/tracto/**/*.js',
+            '<%= yeoman.app %>/shared/resources/**/*.js',
+            '<%= yeoman.app %>/shared/data-services/**/*.js',
+            '<%= yeoman.app %>/shared/auth/**/*.js',
+            '<%= yeoman.app %>/scripts/**/*.js',
+            '!<%= yeoman.app %>/shared/socket/socket.js',
+            '!<%= yeoman.app %>/shared/tracto/tracto.js',
+            '!<%= yeoman.app %>/shared/resources/resources.js',
+            '!<%= yeoman.app %>/shared/data-services/data-services.js',
+            '!<%= yeoman.app %>/shared/auth/auth.js',
+            '!<%= yeoman.app %>/scripts/app.js',
+            '!<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.spec.js',
+            '!<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.mock.js',
           ],
         }
       },

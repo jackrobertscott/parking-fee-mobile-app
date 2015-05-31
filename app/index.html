@@ -1,74 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <base href="/">
+  <title></title>
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
-    <!-- endbower -->
-    <!-- injector:css -->
-    <link rel="stylesheet" href="styles/style.css">
-    <!-- endinjector -->
-    <!-- endbuild -->
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+  <!-- endbower -->
+  <!-- injector:css -->
+  <link rel="stylesheet" href="styles/style.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="styles/ionic.app.css" rel="stylesheet">
-    -->
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="styles/ionic.app.css" rel="stylesheet">
+-->
 
-    <!-- ionic/angularjs js -->
-    <!-- build:js scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/ionic/release/js/ionic.js"></script>
-    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
-    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
+<!-- ionic/angularjs js -->
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/ionic/release/js/ionic.js"></script>
+<script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+<script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+<!-- cordova script (this will be a 404 during development) -->
+<script src="cordova.js"></script>
 
-    <!-- your app's js -->
-    <!-- build:js scripts/scripts.js -->
-    <!-- injector:js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/config.js"></script>
-    <script src="scripts/shared/auth/alpha.auth.js"></script>
-    <script src="scripts/shared/auth/auth.service.js"></script>
-    <script src="scripts/shared/data-services/alpha.data-services.js"></script>
-    <script src="scripts/shared/data-services/data-company.service.js"></script>
-    <script src="scripts/shared/data-services/data-infringement.service.js"></script>
-    <script src="scripts/shared/data-services/data-location.service.js"></script>
-    <script src="scripts/shared/data-services/data-main.service.js"></script>
-    <script src="scripts/shared/data-services/data-session.service.js"></script>
-    <script src="scripts/shared/data-services/data-user.service.js"></script>
-    <script src="scripts/shared/data-services/data-vehicle.service.js"></script>
-    <script src="scripts/shared/resources/alpha.resources.js"></script>
-    <script src="scripts/shared/resources/resource-company.service.js"></script>
-    <script src="scripts/shared/resources/resource-infringement.service.js"></script>
-    <script src="scripts/shared/resources/resource-location.service.js"></script>
-    <script src="scripts/shared/resources/resource-main.service.js"></script>
-    <script src="scripts/shared/resources/resource-session.service.js"></script>
-    <script src="scripts/shared/resources/resource-user.service.js"></script>
-    <script src="scripts/shared/resources/resource-vehicle.service.js"></script>
-    <script src="scripts/sidemenu/sidemenu-item.js"></script>
-    <script src="scripts/sidemenu/sidemenu.controller.js"></script>
-    <script src="scripts/sidemenu/sidemenu.js"></script>
-    <script src="scripts/template/template.controller.js"></script>
-    <script src="scripts/template/template.js"></script>
-    <script src="scripts/user/user.controller.js"></script>
-    <script src="scripts/user/user.js"></script>
-    <!-- endinjector -->
-    <!-- endbuild -->
-  </head>
+<!-- build:js scripts/scripts.js -->
+<script src="shared/socket/socket.js"></script>
+<script src="shared/tracto/tracto.js"></script>
+<script src="shared/resources/resources.js"></script>
+<script src="shared/auth/auth.js"></script>
+<script src="shared/data-services/data-services.js"></script>
+<script src="scripts/app.js"></script>
+<!-- injector:js -->
+<script src="shared/socket/socket.service.js"></script>
+<script src="shared/tracto/tracto.service.js"></script>
+<script src="shared/resources/resource-company.service.js"></script>
+<script src="shared/resources/resource-infringement.service.js"></script>
+<script src="shared/resources/resource-location.service.js"></script>
+<script src="shared/resources/resource-main.service.js"></script>
+<script src="shared/resources/resource-session.service.js"></script>
+<script src="shared/resources/resource-user.service.js"></script>
+<script src="shared/resources/resource-vehicle.service.js"></script>
+<script src="shared/data-services/data-company.service.js"></script>
+<script src="shared/data-services/data-infringement.service.js"></script>
+<script src="shared/data-services/data-location.service.js"></script>
+<script src="shared/data-services/data-main.service.js"></script>
+<script src="shared/data-services/data-session.service.js"></script>
+<script src="shared/data-services/data-user.service.js"></script>
+<script src="shared/data-services/data-vehicle.service.js"></script>
+<script src="shared/auth/auth.service.js"></script>
+<script src="scripts/config.js"></script>
+<script src="scripts/sidemenu/sidemenu-item.js"></script>
+<script src="scripts/sidemenu/sidemenu.controller.js"></script>
+<script src="scripts/sidemenu/sidemenu.js"></script>
+<script src="scripts/template/template.controller.js"></script>
+<script src="scripts/template/template.js"></script>
+<script src="scripts/user/user.controller.js"></script>
+<script src="scripts/user/user.js"></script>
+<!-- endinjector -->
+<!-- endbuild -->
+</head>
 
-  <body ng-app="mobileApp">
-    <ion-nav-view></ion-nav-view>
-  </body>
+<body ng-app="mobileApp">
+  <ion-nav-view></ion-nav-view>
+</body>
 </html>

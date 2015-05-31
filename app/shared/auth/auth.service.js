@@ -5,9 +5,9 @@
   .module('auth')
   .factory('Auth', Auth);
 
-  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', 'tracto'];
+  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', '$window', 'tracto', 'ENV'];
 
-  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, tracto) {
+  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, $window, tracto, ENV) {
     var currentUser = {};
     if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();
@@ -24,7 +24,8 @@
       isAdmin: isAdmin,
       getToken: getToken,
       getUserRoles: getUserRoles,
-      reloadUser: reloadUser
+      reloadUser: reloadUser,
+      loginOauth: loginOauth
     };
 
     return service;
@@ -33,7 +34,7 @@
       cb = cb || angular.noop;
       var deferred = $q.defer();
 
-      $http.post('/auth/local', {
+      $http.post(ENV.apiEndpoint+'auth/local', {
         email: user.email,
         password: user.password
       }).
@@ -117,6 +118,10 @@
       }).catch(function(err) {
         cb(err);
       });
+    }
+
+    function loginOauth(provider) {
+      $window.location.href = ENV.apiEndpoint + 'auth/' + provider;
     }
   }
 })();
