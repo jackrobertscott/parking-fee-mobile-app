@@ -21,24 +21,7 @@
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/login');
-
     $httpProvider.interceptors.push('authInterceptor');
-  }
-
-  ionic.$inject = ['$ionicPlatform'];
-
-  function ionic($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
-    });
   }
 
   authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
@@ -67,6 +50,22 @@
         }
       }
     };
+  }
+
+  ionic.$inject = ['$ionicPlatform'];
+
+  function ionic($ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
   }
 
   run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
