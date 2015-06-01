@@ -15,10 +15,10 @@
     activate();
 
     function activate() {
-      vm.sidemenu = sidemenu();
+      vm.sidemenu = getSidemenu();
     }
 
-    function sidemenu() {
+    function getSidemenu() {
       return [
         new SidemenuItem('Register', 'app.register'),
         new SidemenuItem('Login', 'app.login'),
