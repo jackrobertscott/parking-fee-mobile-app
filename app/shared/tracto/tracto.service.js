@@ -8,27 +8,29 @@
   tracto.$inject = [];
 
   function tracto() {
+    var good = '';
+    var bad = '';
+
     var service = {
-      bad: '',
-      good: '',
+      good: good,
+      bad: bad,
       handle: handle,
       reset: reset
     };
-
     return service;
 
     function handle(err) {
       console.log(err);
       if (err && err.message) {
-        service.bad = 'Error: '+err.message;
+        bad = 'Error: ' + err.message;
       } else {
-        service.bad = 'An error has occurred. We apologize for this inconvenience.';
+        bad = 'An error has occurred. We apologize for this inconvenience.';
       }
     }
 
     function reset() {
-      service.bad = '';
-      service.good = '';
+      bad = '';
+      good = '';
     }
   }
 })();
