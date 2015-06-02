@@ -3,15 +3,13 @@
     <form ng-init="vm.getOne()" ng-submit="vm.update()">
       <div class="list">
         <label class="item item-input">
-          <span class="input-label">Name</span>
-          <input type="text" ng-model="vm.user.name">
+          <input type="text" ng-model="vm.user.name" placeholder="Name">
         </label>
         <label class="item item-input">
-          <span class="input-label">Phone</span>
-          <input type="text" ng-model="vm.user.phone">
+          <input type="text" ng-model="vm.user.phone" placeholder="Phone Number">
         </label>
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Register</button>
+          <button class="button button-block button-positive" type="submit">Save</button>
         </label>
       </div>
     </form>
