@@ -27,6 +27,15 @@
         }
       }
     })
+    .state('app.settings', {
+      url: '/settings',
+      views: {
+        'screen': {
+          templateUrl: 'templates/user/settings.html',
+          controller: 'UserCtrl as vm' // controllerAs does not work with ionic
+        }
+      }
+    })
     .state('app.password', {
       url: '/password',
       views: {
