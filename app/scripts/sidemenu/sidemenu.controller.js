@@ -15,11 +15,13 @@
     activate();
 
     function activate() {
-      vm.sidemenu = createMenu();
-      console.log(Auth.getCurrentUser());
+      Auth.isLoggedInAsync(function(isLoggedIn) {
+        vm.sidemenu = createMenu();
+      });
     }
 
     function createMenu() {
+      menu.reset();
       menu.addItem({label: 'Register', direction: 'app.userRegister', maxRole: 'guest'});
       menu.addItem({label: 'Login', direction: 'app.userLogin', maxRole: 'guest'});
       menu.addItem({label: 'Profile', direction: 'app.userSettings', minRole: 'user'});

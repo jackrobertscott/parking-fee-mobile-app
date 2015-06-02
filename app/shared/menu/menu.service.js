@@ -12,11 +12,16 @@
     var items = [];
 
     var service = {
+      reset: reset,
       addItem: addItem,
       getItems: getItems
     };
 
     return service;
+
+    function reset() {
+      items = [];
+    }
 
     function addItem(object) {
       var item = safeItem(object);
