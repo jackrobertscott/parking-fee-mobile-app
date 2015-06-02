@@ -9,8 +9,8 @@
 
   function config($stateProvider) {
     $stateProvider
-    .state('app.register', {
-      url: '/register',
+    .state('app.userRegister', {
+      url: '/user/register',
       views: {
         'screen': {
           templateUrl: 'templates/user/register.html',
@@ -18,8 +18,8 @@
         }
       }
     })
-    .state('app.login', {
-      url: '/login',
+    .state('app.userLogin', {
+      url: '/user/login',
       views: {
         'screen': {
           templateUrl: 'templates/user/login.html',
@@ -27,8 +27,8 @@
         }
       }
     })
-    .state('app.settings', {
-      url: '/settings',
+    .state('app.userSettings', {
+      url: '/user/settings',
       views: {
         'screen': {
           templateUrl: 'templates/user/settings.html',
@@ -36,8 +36,8 @@
         }
       }
     })
-    .state('app.password', {
-      url: '/password',
+    .state('app.userPassword', {
+      url: '/user/password',
       views: {
         'screen': {
           templateUrl: 'templates/user/password.html',

@@ -19,10 +19,10 @@
     }
 
     function createMenu() {
-      menu.addItem({label: 'Register', direction: 'app.register', maxRole: 'guest'});
-      menu.addItem({label: 'Login', direction: 'app.login', maxRole: 'guest'});
-      menu.addItem({label: 'Profile', direction: 'app.settings', minRole: 'user'});
-      menu.addItem({label: 'Change Password', direction: 'app.password', minRole: 'user'});
+      menu.addItem({label: 'Register', direction: 'app.userRegister', maxRole: 'guest'});
+      menu.addItem({label: 'Login', direction: 'app.userLogin', maxRole: 'guest'});
+      menu.addItem({label: 'Profile', direction: 'app.userSettings', minRole: 'user'});
+      menu.addItem({label: 'Change Password', direction: 'app.userPassword', minRole: 'user'});
       menu.addItem({label: 'Example', direction: 'app.example'});
       menu.addItem({label: 'Logout', action: Auth.logout, minRole: 'user'});
       return menu.getItems();
