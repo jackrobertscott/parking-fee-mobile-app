@@ -14,8 +14,8 @@
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
-  .run(ionic)
-  .run(run);
+  .run(ionicSetup)
+  .run(allowAccess);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
@@ -53,9 +53,9 @@
     };
   }
 
-  ionic.$inject = ['$ionicPlatform'];
+  ionicSetup.$inject = ['$ionicPlatform'];
 
-  function ionic($ionicPlatform) {
+  function ionicSetup($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -69,9 +69,9 @@
     });
   }
 
-  run.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
 
-  function run($rootScope, $location, Auth, tracto) {
+  function allowAccess($rootScope, $location, Auth, tracto) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       tracto.reset();
