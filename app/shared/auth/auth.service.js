@@ -5,9 +5,9 @@
   .module('auth')
   .factory('Auth', Auth);
 
-  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', '$window', 'tracto', 'ENV'];
+  Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', '$window', 'glitch', 'ENV'];
 
-  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, $window, tracto, ENV) {
+  function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, $window, glitch, ENV) {
     var currentUser = {};
     if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();

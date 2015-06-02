@@ -426,14 +426,14 @@ module.exports = function (grunt) {
         files: {
           '<%= yeoman.app %>/index.html': [
             '<%= yeoman.app %>/shared/socket/**/*.js',
-            '<%= yeoman.app %>/shared/tracto/**/*.js',
+            '<%= yeoman.app %>/shared/glitch/**/*.js',
             '<%= yeoman.app %>/shared/resources/**/*.js',
             '<%= yeoman.app %>/shared/data-services/**/*.js',
             '<%= yeoman.app %>/shared/auth/**/*.js',
             '<%= yeoman.app %>/shared/menu/**/*.js',
             '<%= yeoman.app %>/scripts/**/*.js',
             '!<%= yeoman.app %>/shared/socket/socket.js',
-            '!<%= yeoman.app %>/shared/tracto/tracto.js',
+            '!<%= yeoman.app %>/shared/glitch/glitch.js',
             '!<%= yeoman.app %>/shared/resources/resources.js',
             '!<%= yeoman.app %>/shared/data-services/data-services.js',
             '!<%= yeoman.app %>/shared/auth/auth.js',

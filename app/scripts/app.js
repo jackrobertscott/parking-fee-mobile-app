@@ -69,12 +69,12 @@
     });
   }
 
-  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'tracto'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
 
-  function allowAccess($rootScope, $location, Auth, tracto) {
+  function allowAccess($rootScope, $location, Auth, glitch) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      tracto.reset();
+      glitch.reset();
       Auth.isLoggedInAsync(function(loggedIn) {
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();

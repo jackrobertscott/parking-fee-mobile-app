@@ -3,16 +3,16 @@
 
   angular
   .module('mobileApp')
-  .controller('UserCtrl', UserCtrl);
+  .controller('OneUserCtrl', OneUserCtrl);
 
-  UserCtrl.$inject = ['$state', 'tracto', 'Auth', 'dataUser'];
+  OneUserCtrl.$inject = ['$state', 'glitch', 'Auth', 'dataUser'];
 
-  function UserCtrl($state, tracto, Auth, dataUser) {
+  function OneUserCtrl($state, glitch, Auth, dataUser) {
     var vm = this;
 
-    vm.tracto = tracto;
+    vm.glitch = glitch;
     vm.user = {};
-    vm.register = register;
+    vm.create = create;
     vm.login = login;
     vm.changePassword = changePassword;
     vm.update = update;
@@ -24,49 +24,49 @@
     }
 
     function getOne(id) {
-      vm.tracto.reset();
+      vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
       .then(function(item) {
         vm.item = item;
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
 
-    function register() {
-      vm.tracto.reset();
+    function create() {
+      vm.glitch.reset();
       Auth.createUser(vm.user)
       .then(function(){
         $state.go('app.example');
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
 
     function login() {
-      vm.tracto.reset();
+      vm.glitch.reset();
       Auth.login(vm.user)
       .then(function(){
         $state.go('app.example');
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
 
     function changePassword() {
-      vm.tracto.reset();
+      vm.glitch.reset();
       Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
       .then(function(){
         $state.go('app.example');
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
 
     function update() {
-      vm.tracto.reset();
+      vm.glitch.reset();
       dataUser.update(vm.user)
       .then(function() {
         $state.go('app.example');
       })
-      .catch(vm.tracto.handle);
+      .catch(vm.glitch.handle);
     }
   }
 })();

@@ -14,7 +14,7 @@
       views: {
         'screen': {
           templateUrl: 'templates/user/register.html',
-          controller: 'UserCtrl as vm' // controllerAs does not work with ionic
+          controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
       }
     })
@@ -23,7 +23,7 @@
       views: {
         'screen': {
           templateUrl: 'templates/user/login.html',
-          controller: 'UserCtrl as vm' // controllerAs does not work with ionic
+          controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
       }
     })
@@ -32,7 +32,7 @@
       views: {
         'screen': {
           templateUrl: 'templates/user/settings.html',
-          controller: 'UserCtrl as vm' // controllerAs does not work with ionic
+          controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
       }
     })
@@ -41,7 +41,7 @@
       views: {
         'screen': {
           templateUrl: 'templates/user/password.html',
-          controller: 'UserCtrl as vm' // controllerAs does not work with ionic
+          controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
       }
     });

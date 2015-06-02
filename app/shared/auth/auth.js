@@ -8,7 +8,7 @@
     'ngSanitize',
     'ui.router',
     'config',
-    'tracto',
+    'glitch',
     'dataServices'
   ]);
 })();

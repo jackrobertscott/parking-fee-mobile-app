@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-  .module('tracto')
-  .factory('tracto', tracto);
+  .module('glitch')
+  .factory('glitch', glitch);
 
-  tracto.$inject = [];
+  glitch.$inject = [];
 
-  function tracto() {
+  function glitch() {
     var good = '';
     var bad = '';
 
