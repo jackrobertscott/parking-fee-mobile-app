@@ -5,9 +5,9 @@
   .module('menu')
   .factory('menu', menu);
 
-  menu.$inject = ['Auth'];
+  menu.$inject = ['Auth', '$state'];
 
-  function menu(Auth) {
+  function menu(Auth, $state) {
     var roles = Auth.getUserRoles();
     var items = [];
 
@@ -31,7 +31,7 @@
     function safeItem(object) {
       var item = {
         label: object.label || 'MISSING_LABEL',
-        direction: object.direction || '',
+        direction: (object.direction)? $state.href(object.direction): '',
         minRole: setRole(object.minRole),
         maxRole: setRole(object.maxRole),
         action: object.action || angular.noop,

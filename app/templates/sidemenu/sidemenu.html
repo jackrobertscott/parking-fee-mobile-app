@@ -18,7 +18,7 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item ng-repeat="item in vm.sidemenu" menu-close href="{{ item.path }}" ng-click="{{ item.action }}">
+        <ion-item ng-repeat="item in vm.sidemenu" menu-close ng-href="{{ item.direction }}" ng-click="{{ item.action }}">
           {{ item.label }}
         </ion-item>
       </ion-list>

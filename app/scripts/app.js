@@ -9,7 +9,8 @@
     'ionic',
     'config',
     'auth',
-    'dataServices'
+    'dataServices',
+    'menu'
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)

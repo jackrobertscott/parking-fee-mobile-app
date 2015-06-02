@@ -5,9 +5,9 @@
   .module('mobileApp')
   .controller('SidemenuCtrl', SidemenuCtrl);
 
-  SidemenuCtrl.$inject = ['$scope', 'SidemenuItem', 'Auth'];
+  SidemenuCtrl.$inject = ['$scope', 'SidemenuItem', 'Auth', 'menu'];
 
-  function SidemenuCtrl($scope, SidemenuItem, Auth) {
+  function SidemenuCtrl($scope, SidemenuItem, Auth, menu) {
     var vm = this;
 
     vm.sidemenu = [];
@@ -15,17 +15,16 @@
     activate();
 
     function activate() {
-      vm.sidemenu = getSidemenu();
+      vm.sidemenu = createMenu();
     }
 
-    function getSidemenu() {
-      return [
-        new SidemenuItem('Register', 'app.register'),
-        new SidemenuItem('Login', 'app.login'),
-        new SidemenuItem('Change Password', 'app.password'),
-        new SidemenuItem('Example', 'app.example'),
-        new SidemenuItem('Logout', null, Auth.logout)
-      ];
+    function createMenu() {
+      menu.addItem({label: 'Register', direction: 'app.register', maxRole: 'guest'});
+      menu.addItem({label: 'Login', direction: 'app.login', maxRole: 'guest'});
+      menu.addItem({label: 'Change Password', direction: 'app.password', minRole: 'user'});
+      menu.addItem({label: 'Example', direction: 'app.example'});
+      menu.addItem({label: 'Logout', action: Auth.logout, minRole: 'user'});
+      return menu.getItems();
     }
   }
 })();
