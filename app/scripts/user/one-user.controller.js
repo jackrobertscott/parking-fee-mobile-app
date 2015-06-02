@@ -12,6 +12,7 @@
 
     vm.glitch = glitch;
     vm.user = {};
+    vm.getOne = getOne;
     vm.create = create;
     vm.login = login;
     vm.changePassword = changePassword;
@@ -27,8 +28,8 @@
       vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
-      .then(function(item) {
-        vm.item = item;
+      .then(function(user) {
+        vm.user = user;
       })
       .catch(vm.glitch.handle);
     }

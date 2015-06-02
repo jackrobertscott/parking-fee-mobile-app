@@ -9,12 +9,30 @@
 
   function config($stateProvider) {
     $stateProvider
-    .state('app.register', {
-      url: '/register',
+    .state('app.vehicleUser', {
+      url: '/vehicle/user',
+      views: {
+        'screen': {
+          templateUrl: 'templates/vehicle/user.html',
+          controller: 'ManyVehiclesCtrl as vm' // controllerAs does not work with ionic
+        }
+      }
+    })
+    .state('app.vehicleRegister', {
+      url: '/vehicle/register',
       views: {
         'screen': {
           templateUrl: 'templates/vehicle/register.html',
-          controller: 'VehicleCtrl as vm' // controllerAs does not work with ionic
+          controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
+        }
+      }
+    })
+    .state('app.vehicleSettings', {
+      url: '/vehicle/settings/:id',
+      views: {
+        'screen': {
+          templateUrl: 'templates/vehicle/settings.html',
+          controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
         }
       }
     });

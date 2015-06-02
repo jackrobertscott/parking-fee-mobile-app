@@ -21,7 +21,7 @@
 
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/login');
+    $urlRouterProvider.otherwise('/app/user/login');
     $httpProvider.interceptors.push('authInterceptor');
   }
 
@@ -41,7 +41,7 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/app/login');
+          $location.path('/app/user/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -79,7 +79,7 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            $location.path('/app/login');
+            $location.path('/app/user/login');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
             $location.path('/app/example');

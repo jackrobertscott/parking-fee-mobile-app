@@ -5,9 +5,9 @@
   .module('mobileApp')
   .controller('SidemenuCtrl', SidemenuCtrl);
 
-  SidemenuCtrl.$inject = ['$scope', 'SidemenuItem', 'Auth', 'menu'];
+  SidemenuCtrl.$inject = ['$scope', 'Auth', 'menu'];
 
-  function SidemenuCtrl($scope, SidemenuItem, Auth, menu) {
+  function SidemenuCtrl($scope, Auth, menu) {
     var vm = this;
 
     vm.sidemenu = [];
@@ -16,6 +16,7 @@
 
     function activate() {
       vm.sidemenu = createMenu();
+      console.log(Auth.getCurrentUser());
     }
 
     function createMenu() {
@@ -23,7 +24,8 @@
       menu.addItem({label: 'Login', direction: 'app.userLogin', maxRole: 'guest'});
       menu.addItem({label: 'Profile', direction: 'app.userSettings', minRole: 'user'});
       menu.addItem({label: 'Change Password', direction: 'app.userPassword', minRole: 'user'});
-      menu.addItem({label: 'Example', direction: 'app.example'});
+      menu.addItem({label: 'My Vehicles', direction: 'app.vehicleUser', minRole: 'user'});
+      menu.addItem({label: 'New Vehicle', direction: 'app.vehicleRegister', minRole: 'user'});
       menu.addItem({label: 'Logout', action: Auth.logout, minRole: 'user'});
       return menu.getItems();
     }
