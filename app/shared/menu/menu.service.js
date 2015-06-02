@@ -39,7 +39,6 @@
         direction: (object.direction)? $state.href(object.direction): '',
         minRole: setRole(object.minRole),
         maxRole: setRole(object.maxRole),
-        action: object.action || angular.noop,
         children: []
       };
       return item;

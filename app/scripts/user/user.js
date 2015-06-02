@@ -27,6 +27,15 @@
         }
       }
     })
+    .state('app.userLogout', {
+      url: '/user/logout',
+      views: {
+        'screen': {
+          templateUrl: 'templates/user/logout.html',
+          controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
+        }
+      }
+    })
     .state('app.userSettings', {
       url: '/user/settings',
       views: {

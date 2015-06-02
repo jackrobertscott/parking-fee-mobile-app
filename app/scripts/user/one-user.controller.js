@@ -17,6 +17,7 @@
     vm.login = login;
     vm.changePassword = changePassword;
     vm.update = update;
+    vm.logout = logout;
 
     activate();
 
@@ -68,6 +69,11 @@
         $state.go('app.example');
       })
       .catch(vm.glitch.handle);
+    }
+
+    function logout() {
+      Auth.logout();
+      $state.go('app.userLogin');
     }
   }
 })();

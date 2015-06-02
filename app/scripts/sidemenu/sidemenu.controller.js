@@ -28,7 +28,7 @@
       menu.addItem({label: 'Change Password', direction: 'app.userPassword', minRole: 'user'});
       menu.addItem({label: 'My Vehicles', direction: 'app.vehicleUser', minRole: 'user'});
       menu.addItem({label: 'New Vehicle', direction: 'app.vehicleRegister', minRole: 'user'});
-      menu.addItem({label: 'Logout', action: Auth.logout, minRole: 'user'});
+      menu.addItem({label: 'Logout', direction: 'app.userLogout', minRole: 'user'});
       return menu.getItems();
     }
   }
