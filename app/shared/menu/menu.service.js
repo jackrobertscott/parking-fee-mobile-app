@@ -74,7 +74,7 @@
 
     function setRole(role) {
       if (role) {
-        if(roles.indexOf(role) === -1) {
+        if (roles.indexOf(role) === -1) {
           console.log('MENU_SET_ROLE_NOT_VALID: ' + role);
         } else {
           return role;
