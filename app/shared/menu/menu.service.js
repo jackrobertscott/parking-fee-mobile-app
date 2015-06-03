@@ -36,7 +36,7 @@
     function safeItem(object) {
       var item = {
         label: object.label || 'MISSING_LABEL',
-        direction: (object.direction)? $state.href(object.direction): '',
+        direction: object.direction || '',
         minRole: setRole(object.minRole),
         maxRole: setRole(object.maxRole),
         children: []
