@@ -14,7 +14,7 @@
     vm.glitch = glitch;
     vm.getMany = getMany;
     vm.remove = remove;
-    vm.getForUser = getForUser;
+    vm.getFewUser = getFewUser;
     vm.toSettings = toSettings;
 
     activate();
@@ -46,7 +46,7 @@
       .catch(vm.glitch.handle);
     }
 
-    function getForUser() {
+    function getFewUser() {
       dataVehicle.getUserVehicles(Auth.getCurrentUser()._id)
       .then(function(vehicles) {
         vm.vehicles = vehicles;

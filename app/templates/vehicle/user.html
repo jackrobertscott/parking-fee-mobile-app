@@ -1,6 +1,6 @@
 <ion-view view-title="My Vehicles">
   <ion-content>
-    <div class="list list-inset" ng-init="vm.getForUser()">
+    <div class="list list-inset" ng-init="vm.getFewUser()">
       <div class="item" ng-repeat="vehicle in vm.vehicles" ng-click="vm.toSettings(vehicle)">
         {{ vehicle.plate }}
       </div>
