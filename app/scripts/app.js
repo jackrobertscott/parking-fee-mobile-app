@@ -8,8 +8,9 @@
     'ngSanitize',
     'ionic',
     'config',
-    'auth',
+    'glitch',
     'dataServices',
+    'auth',
     'menu'
   ])
   .config(config)
