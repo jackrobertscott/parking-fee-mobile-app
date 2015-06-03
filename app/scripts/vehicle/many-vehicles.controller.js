@@ -41,7 +41,7 @@
             array.splice(i, 1);
           }
         });
-        vm.glitch.good = 'Successfully deleted vehicle';
+        vm.glitch.setSuccess('Successfully deleted vehicle');
       })
       .catch(vm.glitch.handle);
     }
