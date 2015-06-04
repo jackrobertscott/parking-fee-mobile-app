@@ -34,7 +34,6 @@
     ////////////
 
     function getOne(id) {
-      vm.glitch.reset();
       id = id || $stateParams.id;
       dataVehicle.getOne(id)
       .then(function(vehicle) {
@@ -44,7 +43,6 @@
     }
 
     function create(form) {
-      vm.glitch.reset();
       // should: form validation check
       var user = Auth.getCurrentUser();
       angular.extend(vm.vehicle, {
@@ -59,7 +57,6 @@
     }
 
     function update(form) {
-      vm.glitch.reset();
       dataVehicle.update(vm.vehicle)
       .then(function(vehicle) {
         $state.go('app.vehicleUser');
@@ -68,7 +65,6 @@
     }
 
     function remove(form) {
-      vm.glitch.reset();
       dataVehicle.remove(vm.vehicle)
       .then(function() {
         $state.go('app.vehicleUser');

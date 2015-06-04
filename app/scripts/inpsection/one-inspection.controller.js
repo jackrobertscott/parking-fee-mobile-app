@@ -29,7 +29,6 @@
     ////////////
 
     function getOne(id) {
-      vm.glitch.reset();
       id = id || $stateParams.id;
       dataInspection.getOne(id)
       .then(function(inspection) {
@@ -39,7 +38,6 @@
     }
 
     function create(form) {
-      vm.glitch.reset();
       var user = Auth.getCurrentUser();
       angular.extend(vm.inspection, {
         _creator: user._id,
@@ -53,7 +51,6 @@
     }
 
     function update(form) {
-      vm.glitch.reset();
       dataInspection.update(vm.inspection)
       .then(function(inspection) {
         vm.glitch.setSuccess('Successfully updated');
@@ -62,7 +59,6 @@
     }
 
     function remove(form) {
-      vm.glitch.reset();
       dataInspection.remove(vm.inspection)
       .then(function() {
         vm.inspection = {};

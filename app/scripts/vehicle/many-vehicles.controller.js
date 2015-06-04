@@ -28,7 +28,6 @@
     ////////////
 
     function getMany() {
-      vm.glitch.reset();
       dataVehicle.getMany()
       .then(function(vehicles) {
         vm.vehicles = vehicles;
@@ -37,7 +36,6 @@
     }
 
     function remove(vehicle) {
-      vm.glitch.reset();
       dataVehicle.remove(vehicle)
       .then(function() {
         vm.vehicles.forEach(function(elem, i, array) {

@@ -30,7 +30,6 @@
     ////////////
 
     function getOne(id) {
-      vm.glitch.reset();
       id = id || Auth.getCurrentUser()._id;
       dataUser.getOne(id)
       .then(function(user) {
@@ -40,7 +39,6 @@
     }
 
     function create() {
-      vm.glitch.reset();
       Auth.createUser(vm.user)
       .then(function(){
         $state.go('app.userSettings');
@@ -49,7 +47,6 @@
     }
 
     function login() {
-      vm.glitch.reset();
       Auth.login(vm.user)
       .then(function(){
         $state.go('app.userSettings');
@@ -58,7 +55,6 @@
     }
 
     function changePassword() {
-      vm.glitch.reset();
       Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
       .then(function(){
         $state.go('app.userSettings');
@@ -67,7 +63,6 @@
     }
 
     function update() {
-      vm.glitch.reset();
       dataUser.update(vm.user)
       .then(function() {
         $state.go('app.vehicleUser');

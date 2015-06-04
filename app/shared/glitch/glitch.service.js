@@ -45,16 +45,13 @@
     }
 
     function setHandle(fn) {
-      handle = fn;
+      service.handle = fn;
     }
 
     function defaultHandle(err) {
       console.log(err);
-      if (err && err.message) {
-        bad = 'Error: ' + err.message;
-      } else {
-        bad = 'An error has occurred. We apologize for this inconvenience.';
-      }
+      var message = err.message || err.data || '';
+      setError(message);
     }
   }
 })();

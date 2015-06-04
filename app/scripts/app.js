@@ -16,6 +16,7 @@
   .config(config)
   .factory('authInterceptor', authInterceptor)
   .run(ionicSetup)
+  .run(glitchSetup)
   .run(allowAccess);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
@@ -86,6 +87,27 @@
             $location.path('/app/example');
           }
         }
+      });
+    });
+  }
+
+  glitchSetup.$inject = ['glitch', '$ionicPopup', '$rootScope'];
+
+  function glitchSetup(glitch, $ionicPopup, $rootScope) {
+    // Set handle function for glitch
+    glitch.setHandle(function(err) {
+      console.log(err);
+      var message = err.message || err.data || '';
+      glitch.setError(message);
+      $rootScope.$broadcast('glitch:error');
+    });
+    // Listen for error and displat popup
+    $rootScope.$on('glitch:error', function() {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: glitch.getError()
+      }).then(function() {
+        glitch.reset();
       });
     });
   }

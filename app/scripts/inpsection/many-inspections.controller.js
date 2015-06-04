@@ -26,7 +26,6 @@
     ////////////
 
     function getFewCompany() {
-      vm.glitch.reset();
       dataInspection.getFewCompany(Auth.getCurrentUser().company)
       .then(function(items) {
         vm.items = items;
@@ -35,7 +34,6 @@
     }
 
     function getUserInfringed() {
-      vm.glitch.reset();
       dataInspection.getUserInfringed(Auth.getCurrentUser()._id)
       .then(function(inspections) {
         vm.inspections = inspections;
