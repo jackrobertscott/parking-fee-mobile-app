@@ -43,7 +43,7 @@
       vm.glitch.reset();
       Auth.createUser(vm.user)
       .then(function(){
-        $state.go('app.example');
+        $state.go('app.userSettings');
       })
       .catch(vm.glitch.handle);
     }
@@ -52,7 +52,7 @@
       vm.glitch.reset();
       Auth.login(vm.user)
       .then(function(){
-        $state.go('app.example');
+        $state.go('app.userSettings');
       })
       .catch(vm.glitch.handle);
     }
@@ -61,7 +61,7 @@
       vm.glitch.reset();
       Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
       .then(function(){
-        $state.go('app.example');
+        $state.go('app.userSettings');
       })
       .catch(vm.glitch.handle);
     }
@@ -70,7 +70,7 @@
       vm.glitch.reset();
       dataUser.update(vm.user)
       .then(function() {
-        $state.go('app.example');
+        $state.go('app.vehicleUser');
       })
       .catch(vm.glitch.handle);
     }

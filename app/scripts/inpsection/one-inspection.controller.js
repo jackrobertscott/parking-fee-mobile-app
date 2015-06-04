@@ -10,7 +10,7 @@
   function OneInspectionCtrl(dataInspection, glitch, $state, $stateParams, Auth) {
     var vm = this;
 
-    vm.item = {};
+    vm.inspection = {};
     vm.glitch = glitch;
     vm.submitted = false;
     vm.getOne = getOne;
@@ -32,62 +32,43 @@
       vm.glitch.reset();
       id = id || $stateParams.id;
       dataInspection.getOne(id)
-      .then(function(item) {
-        vm.item = item;
+      .then(function(inspection) {
+        vm.inspection = inspection;
       })
       .catch(vm.glitch.handle);
     }
 
     function create(form) {
       vm.glitch.reset();
-      vm.submitted = true;
-      if (!form.$valid) {
-        invalid();
-      } else {
-        var user = Auth.getCurrentUser();
-        angular.extend(vm.item, {
-          _creator: user._id,
-          company: user.company
-        });
-        dataInspection.create(vm.item)
-        .then(function(item) {
-          $state.go('inspection');
-        })
-        .catch(vm.glitch.handle);
-      }
+      var user = Auth.getCurrentUser();
+      angular.extend(vm.inspection, {
+        _creator: user._id,
+        company: user.company
+      });
+      dataInspection.create(vm.inspection)
+      .then(function(inspection) {
+        $state.go('inspection');
+      })
+      .catch(vm.glitch.handle);
     }
 
     function update(form) {
       vm.glitch.reset();
-      vm.submitted = true;
-      if (!form.$valid) {
-        invalid();
-      } else {
-        dataInspection.update(vm.item)
-        .then(function(item) {
-          vm.glitch.setSuccess('Successfully updated');
-        })
-        .catch(vm.glitch.handle);
-      }
+      dataInspection.update(vm.inspection)
+      .then(function(inspection) {
+        vm.glitch.setSuccess('Successfully updated');
+      })
+      .catch(vm.glitch.handle);
     }
 
     function remove(form) {
       vm.glitch.reset();
-      if (!form.$valid) {
-        invalid();
-      } else {
-        dataInspection.remove(vm.item)
-        .then(function() {
-          vm.item = {};
-          $state.go('inspection');
-        })
-        .catch(vm.glitch.handle);
-      }
-    }
-
-    function invalid() {
-      vm.submitted = true;
-      vm.glitch.setError('Form is invalid');
+      dataInspection.remove(vm.inspection)
+      .then(function() {
+        vm.inspection = {};
+        $state.go('inspection');
+      })
+      .catch(vm.glitch.handle);
     }
   }
 })();

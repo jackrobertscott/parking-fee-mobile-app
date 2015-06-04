@@ -1,0 +1,30 @@
+<ion-view view-title="Details">
+  <ion-content>
+    <div class="list list-inset" ng-init="vm.getOne()">
+      <div class="item item-divider">
+        Vehicle Registration Number
+      </div>
+      <a class="item">
+        {{ vm.inpection.plate }}
+      </a>
+      <div class="item item-divider">
+        Infringement
+      </div>
+      <a class="item">
+        {{ vm.inpection.infringement.name }}
+      </a>
+      <div class="item item-divider" ng-if="vm.inpection.infringement.info != ''">
+        Infringement Description
+      </div>
+      <a class="item" ng-if="vm.inpection.infringement.info != ''">
+        {{ vm.inpection.infringement.info }}
+      </a>
+      <div class="item item-divider">
+        Payment Due
+      </div>
+      <a class="item">
+        {{ vm.inpection.infringement.payment }}
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
