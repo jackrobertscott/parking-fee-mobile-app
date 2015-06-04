@@ -15,9 +15,7 @@
     activate();
 
     function activate() {
-      Auth.isLoggedInAsync(function(isLoggedIn) {
-        vm.sidemenu = createMenu();
-      });
+      vm.sidemenu = createMenu();
     }
 
     function createMenu() {
