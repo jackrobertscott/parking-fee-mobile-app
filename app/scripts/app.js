@@ -15,9 +15,9 @@
   ])
   .config(config)
   .factory('authInterceptor', authInterceptor)
-  .run(ionicSetup)
-  .run(glitchSetup)
-  .run(allowAccess);
+  //.factory('loadingInterceptor', loadingInterceptor)
+  .run(allowAccess)
+  .run(ionicSetup);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
@@ -25,6 +25,67 @@
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/user/login');
     $httpProvider.interceptors.push('authInterceptor');
+    //$httpProvider.interceptors.push('loadingInterceptor');
+  }
+
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
+
+  function allowAccess($rootScope, $location, Auth, glitch) {
+    // Redirect to login if route requires auth and you're not logged in
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      glitch.reset();
+      Auth.isLoggedInAsync(function(loggedIn) {
+        if (toState.data && toState.data.role && toState.data.role !== 'guest') {
+          var userRoles = Auth.getUserRoles();
+          if (!loggedIn) {
+            $location.path('/app/user/login');
+          } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
+            // Logged in but not authorised
+            $location.path('/app/example');
+          }
+        }
+      });
+    });
+  }
+
+  ionicSetup.$inject = ['$ionicPlatform', 'glitch', '$ionicPopup', '$rootScope', '$ionicLoading'];
+
+  function ionicSetup($ionicPlatform, glitch, $ionicPopup, $rootScope, $ionicLoading) {
+    $ionicPlatform.ready(function() {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+    });
+    // Set handle function for glitch
+    glitch.setHandle(function(err) {
+      console.log(err);
+      var message = err.message || err.data || '';
+      glitch.setError(message);
+      $rootScope.$broadcast('glitch:error');
+    });
+    // Listen for error and displat popup
+    $rootScope.$on('glitch:error', function() {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: glitch.getError()
+      }).then(function() {
+        glitch.reset();
+      });
+    });
+    // Handle loading screen
+    $rootScope.$on('loading:show', function() {
+      console.log('hey');
+      $ionicLoading.show({template: 'foo'});
+    });
+    $rootScope.$on('loading:hide', function() {
+      $ionicLoading.hide();
+    });
   }
 
   authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
@@ -55,60 +116,21 @@
     };
   }
 
-  ionicSetup.$inject = ['$ionicPlatform'];
-
-  function ionicSetup($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      if (window.cordova && window.cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if (window.StatusBar) {
-        // org.apache.cordova.statusbar required
-        StatusBar.styleDefault();
-      }
-    });
-  }
-
-  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
-
-  function allowAccess($rootScope, $location, Auth, glitch) {
-    // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      glitch.reset();
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (toState.data && toState.data.role && toState.data.role !== 'guest') {
-          var userRoles = Auth.getUserRoles();
-          if (!loggedIn) {
-            $location.path('/app/user/login');
-          } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
-            // Logged in but not authorised
-            $location.path('/app/example');
-          }
-        }
-      });
-    });
-  }
-
-  glitchSetup.$inject = ['glitch', '$ionicPopup', '$rootScope'];
-
-  function glitchSetup(glitch, $ionicPopup, $rootScope) {
-    // Set handle function for glitch
-    glitch.setHandle(function(err) {
-      console.log(err);
-      var message = err.message || err.data || '';
-      glitch.setError(message);
-      $rootScope.$broadcast('glitch:error');
-    });
-    // Listen for error and displat popup
-    $rootScope.$on('glitch:error', function() {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: glitch.getError()
-      }).then(function() {
-        glitch.reset();
-      });
-    });
-  }
+  // // Loading screen show for slow server calls
+  // loadingInterceptor.$inject = ['$rootScope'];
+  //
+  // function loadingInterceptor($rootScope) {
+  //   return {
+  //     request: function(config) {
+  //       console.log('loading:show');
+  //       $rootScope.$broadcast('loading:show');
+  //       return config;
+  //     },
+  //     response: function(response) {
+  //       console.log('loading:hide');
+  //       $rootScope.$broadcast('loading:hide');
+  //       return response;
+  //     }
+  //   };
+  // }
 })();
