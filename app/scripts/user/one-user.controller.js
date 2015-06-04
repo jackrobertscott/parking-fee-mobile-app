@@ -19,11 +19,15 @@
     vm.update = update;
     vm.logout = logout;
 
+    ////////////
+
     activate();
 
     function activate() {
       // code...
     }
+
+    ////////////
 
     function getOne(id) {
       vm.glitch.reset();

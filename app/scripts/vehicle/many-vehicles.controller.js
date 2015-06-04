@@ -17,11 +17,15 @@
     vm.getFewUser = getFewUser;
     vm.toSettings = toSettings;
 
+    ////////////
+
     activate();
 
     function activate() {
       // code...
     }
+
+    ////////////
 
     function getMany() {
       vm.glitch.reset();
