@@ -41,7 +41,7 @@
             $location.path('/app/user/login');
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            $location.path('/app/example');
+            $location.path('/app/session/start');
           }
         }
       });
@@ -80,7 +80,7 @@
     });
     // Handle loading screen
     $rootScope.$on('loading:show', function() {
-      console.log('hey');
+      console.log('loading:show');
       $ionicLoading.show({template: 'foo'});
     });
     $rootScope.$on('loading:hide', function() {

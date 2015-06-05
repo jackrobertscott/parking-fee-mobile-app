@@ -12,17 +12,23 @@
 
     vm.session = {};
     vm.vehicles = [];
+    vm.locations = [];
+    vm.times = [];
     vm.glitch = glitch;
     vm.getOne = getOne;
-    vm.create = create;
-    vm.update = update;
+    vm.getUserVehicles = getUserVehicles;
+    vm.getLocations = getLocations;
+    vm.startSession = startSession;
+    vm.endSession = endSession;
 
     ////////////
 
     activate();
 
     function activate() {
-      // code...
+      for (var i = 30; i < 12*60; i+30) { // need to make sure not longer than limits
+        vm.times.push({label: String(i + ' mins'), value: i});
+      }
     }
 
     ////////////
@@ -58,7 +64,8 @@
       angular.extend(vm.session, {
         _creator: user._id,
         vehicle: vm.session.vehicle._id,
-        start: Date.now
+        start: Date.now,
+        end: Date.now + vm.session.time.value
       });
       dataSession.create(vm.session)
       .then(function(session) {
