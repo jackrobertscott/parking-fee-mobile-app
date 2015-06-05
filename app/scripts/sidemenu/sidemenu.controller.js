@@ -12,11 +12,15 @@
 
     vm.sidemenu = [];
 
+    ////////////
+
     activate();
 
     function activate() {
       vm.sidemenu = createMenu();
     }
+
+    ////////////
 
     function createMenu() {
       menu.reset();

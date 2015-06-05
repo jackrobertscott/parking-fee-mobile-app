@@ -12,7 +12,6 @@
 
     vm.inspection = {};
     vm.glitch = glitch;
-    vm.submitted = false;
     vm.getOne = getOne;
     vm.create = create;
     vm.update = update;

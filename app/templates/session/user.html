@@ -1,0 +1,10 @@
+<ion-view view-title="User Sessions">
+  <ion-content>
+    <div class="list list-inset" ng-init="vm.getFewUser()">
+      <a class="item" ng-repeat="session in vm.sessions" ng-click="vm.toDetails(session)">
+        <h2>{{ session.vehicle.plate }}</h2>
+        <p>{{ session.start | date:'shortTime' }} - {{ session.end | date:'shortTime' }}</p>
+        <p>{{ session.payment | currency }}</p>
+      </a>
+  </ion-content>
+</ion-view>
