@@ -12,7 +12,7 @@
     .state('app.vehicleUser', {
       url: '/vehicle/user',
       views: {
-        'screen': {
+        screen: {
           templateUrl: 'templates/vehicle/user.html',
           controller: 'ManyVehiclesCtrl as vm' // controllerAs does not work with ionic
         }
@@ -21,7 +21,7 @@
     .state('app.vehicleRegister', {
       url: '/vehicle/register',
       views: {
-        'screen': {
+        screen: {
           templateUrl: 'templates/vehicle/register.html',
           controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
         }
@@ -30,7 +30,7 @@
     .state('app.vehicleSettings', {
       url: '/vehicle/settings/:id',
       views: {
-        'screen': {
+        screen: {
           templateUrl: 'templates/vehicle/settings.html',
           controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
         }
