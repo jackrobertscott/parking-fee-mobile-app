@@ -16,6 +16,9 @@
           templateUrl: 'templates/session/user.html',
           controller: 'ManySessionsCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.sessionStart', {
@@ -25,6 +28,9 @@
           templateUrl: 'templates/session/start.html',
           controller: 'OneSessionCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.sessionEnd', {
@@ -34,6 +40,9 @@
           templateUrl: 'templates/session/end.html',
           controller: 'OneSessionCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.sessionDetail', {
@@ -43,6 +52,9 @@
           templateUrl: 'templates/session/detail.html',
           controller: 'OneSessionCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     });
   }

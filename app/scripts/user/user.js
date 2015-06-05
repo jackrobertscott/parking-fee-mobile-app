@@ -34,6 +34,9 @@
           templateUrl: 'templates/user/logout.html',
           controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.userSettings', {
@@ -43,6 +46,9 @@
           templateUrl: 'templates/user/settings.html',
           controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.userPassword', {
@@ -52,6 +58,9 @@
           templateUrl: 'templates/user/password.html',
           controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     });
   }

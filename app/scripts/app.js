@@ -39,9 +39,11 @@
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
             $location.path('/app/user/login');
+            glitch.handle({message: 'Not authorised to access screen'});
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
             $location.path('/app/session/start');
+            glitch.handle({message: 'Not authorised to access screen'});
           }
         }
       });

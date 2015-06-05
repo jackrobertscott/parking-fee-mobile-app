@@ -16,6 +16,9 @@
           templateUrl: 'templates/vehicle/user.html',
           controller: 'ManyVehiclesCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.vehicleRegister', {
@@ -25,6 +28,9 @@
           templateUrl: 'templates/vehicle/register.html',
           controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     })
     .state('app.vehicleSettings', {
@@ -34,6 +40,9 @@
           templateUrl: 'templates/vehicle/settings.html',
           controller: 'OneVehicleCtrl as vm' // controllerAs does not work with ionic
         }
+      },
+      data: {
+        role: 'user'
       }
     });
   }
