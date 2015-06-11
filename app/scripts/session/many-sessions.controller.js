@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('mobileApp')
-  .controller('ManySessionsCtrl', ManySessionsCtrl);
+    .module('mobileApp')
+    .controller('ManySessionsCtrl', ManySessionsCtrl);
 
   ManySessionsCtrl.$inject = ['dataSession', 'glitch', 'Auth', '$state'];
 
@@ -27,10 +27,10 @@
 
     function getFewUser() {
       dataSession.getUserSessions(Auth.getCurrentUser()._id)
-      .then(function(sessions) {
-        vm.sessions = sessions;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(sessions) {
+          vm.sessions = sessions;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function toDetails(session) {

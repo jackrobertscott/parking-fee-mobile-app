@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('mobileApp')
-  .controller('OneVehicleCtrl', OneVehicleCtrl);
+    .module('mobileApp')
+    .controller('OneVehicleCtrl', OneVehicleCtrl);
 
   OneVehicleCtrl.$inject = ['dataVehicle', 'glitch', 'Auth', '$state', '$stateParams'];
 
@@ -36,10 +36,10 @@
     function getOne(id) {
       id = id || $stateParams.id;
       dataVehicle.getOne(id)
-      .then(function(vehicle) {
-        vm.vehicle = vehicle;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicle) {
+          vm.vehicle = vehicle;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function create(form) {
@@ -50,26 +50,26 @@
         users: [user._id]
       });
       dataVehicle.create(vm.vehicle)
-      .then(function(vehicle) {
-        $state.go('app.vehicleUser');
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicle) {
+          $state.go('app.vehicleUser');
+        })
+        .catch(vm.glitch.handle);
     }
 
     function update(form) {
       dataVehicle.update(vm.vehicle)
-      .then(function(vehicle) {
-        $state.go('app.vehicleUser');
-      })
-      .catch(vm.glitch.handle);
+        .then(function(vehicle) {
+          $state.go('app.vehicleUser');
+        })
+        .catch(vm.glitch.handle);
     }
 
     function remove(form) {
       dataVehicle.remove(vm.vehicle)
-      .then(function() {
-        $state.go('app.vehicleUser');
-      })
-      .catch(vm.glitch.handle);
+        .then(function() {
+          $state.go('app.vehicleUser');
+        })
+        .catch(vm.glitch.handle);
     }
   }
 })();

@@ -2,22 +2,22 @@
   'use strict';
 
   angular
-  .module('mobileApp', [
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ionic',
-    'config',
-    'glitch',
-    'dataServices',
-    'auth',
-    'menu'
-  ])
-  .config(config)
-  .factory('authInterceptor', authInterceptor)
-  //.factory('loadingInterceptor', loadingInterceptor)
-  .run(allowAccess)
-  .run(ionicSetup);
+    .module('mobileApp', [
+      'ngCookies',
+      'ngResource',
+      'ngSanitize',
+      'ionic',
+      'config',
+      'glitch',
+      'dataServices',
+      'auth',
+      'menu'
+    ])
+    .config(config)
+    .factory('authInterceptor', authInterceptor)
+    //.factory('loadingInterceptor', loadingInterceptor)
+    .run(allowAccess)
+    .run(ionicSetup);
 
   config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
@@ -39,11 +39,15 @@
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
             $location.path('/app/user/login');
-            glitch.handle({message: 'Not authorised to access screen'});
+            glitch.handle({
+              message: 'Not authorised to access screen'
+            });
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
             $location.path('/app/session/start');
-            glitch.handle({message: 'Not authorised to access screen'});
+            glitch.handle({
+              message: 'Not authorised to access screen'
+            });
           }
         }
       });
@@ -83,7 +87,9 @@
     // Handle loading screen
     $rootScope.$on('loading:show', function() {
       console.log('loading:show');
-      $ionicLoading.show({template: 'foo'});
+      $ionicLoading.show({
+        template: 'foo'
+      });
     });
     $rootScope.$on('loading:hide', function() {
       $ionicLoading.hide();
@@ -95,7 +101,7 @@
   function authInterceptor($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
-      request: function (config) {
+      request: function(config) {
         config.headers = config.headers || {};
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
@@ -110,8 +116,7 @@
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
-        }
-        else {
+        } else {
           return $q.reject(response);
         }
       }

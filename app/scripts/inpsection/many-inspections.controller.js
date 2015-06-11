@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('mobileApp')
-  .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
+    .module('mobileApp')
+    .controller('ManyInspectionsCtrl', ManyInspectionsCtrl);
 
   ManyInspectionsCtrl.$inject = ['dataInspection', 'glitch', 'Auth', '$state'];
 
@@ -27,18 +27,18 @@
 
     function getFewCompany() {
       dataInspection.getFewCompany(Auth.getCurrentUser().company)
-      .then(function(items) {
-        vm.items = items;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(items) {
+          vm.items = items;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function getUserInfringed() {
       dataInspection.getUserInfringed(Auth.getCurrentUser()._id)
-      .then(function(inspections) {
-        vm.inspections = inspections;
-      })
-      .catch(vm.glitch.handle);
+        .then(function(inspections) {
+          vm.inspections = inspections;
+        })
+        .catch(vm.glitch.handle);
     }
 
     function toDetails(item) {
