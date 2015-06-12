@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-  .module('resources')
-  .factory('ResourceSession', ResourceSession);
+    .module('resources')
+    .factory('ResourceSession', ResourceSession);
 
   ResourceSession.$inject = ['$resource', 'ENV'];
 
   function ResourceSession($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'api/sessions/:id/:action', {
+    return $resource(ENV.apiEndpoint + 'api/sessions/:id/:action', {
       id: '@_id'
     }, {
       update: {

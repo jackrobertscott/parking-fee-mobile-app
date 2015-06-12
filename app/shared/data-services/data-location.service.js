@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('dataServices')
-  .factory('dataLocation', dataLocation);
+    .module('dataServices')
+    .factory('dataLocation', dataLocation);
 
   dataLocation.$inject = ['ResourceLocation'];
 
@@ -20,7 +20,9 @@
     return service;
 
     function getOne(id) {
-      return ResourceLocation.get({id: id}).$promise;
+      return ResourceLocation.get({
+        id: id
+      }).$promise;
     }
 
     function getMany() {
@@ -43,7 +45,9 @@
     }
 
     function getCompanyLocations(id) {
-      return ResourceLocation.getCompanyLocations({id: id}).$promise;
+      return ResourceLocation.getCompanyLocations({
+        id: id
+      }).$promise;
     }
   }
 })();

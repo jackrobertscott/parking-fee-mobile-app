@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('socket')
-  .factory('socket', socketInstance);
+    .module('socket')
+    .factory('socket', socketInstance);
 
   socketInstance.$inject = ['socketFactory'];
 
@@ -28,23 +28,25 @@
     return service;
 
     /**
-    * Register listeners to sync an array with updates on a model
-    *
-    * Takes the array we want to sync, the model name that socket updates are sent from,
-    * and an optional callback function after new items are updated.
-    *
-    * @param {String} modelName
-    * @param {Array} array
-    * @param {Function} cb
-    */
+     * Register listeners to sync an array with updates on a model
+     *
+     * Takes the array we want to sync, the model name that socket updates are sent from,
+     * and an optional callback function after new items are updated.
+     *
+     * @param {String} modelName
+     * @param {Array} array
+     * @param {Function} cb
+     */
     function syncUpdates(modelName, array, cb) {
       cb = cb || angular.noop;
 
       /**
-      * Syncs item creation/updates on 'model:save'
-      */
-      socket.on(modelName + ':save', function (item) {
-        var oldItem = _.find(array, {_id: item._id});
+       * Syncs item creation/updates on 'model:save'
+       */
+      socket.on(modelName + ':save', function(item) {
+        var oldItem = _.find(array, {
+          _id: item._id
+        });
         var index = array.indexOf(oldItem);
         var event = 'created';
 
@@ -61,20 +63,22 @@
       });
 
       /**
-      * Syncs removed items on 'model:remove'
-      */
-      socket.on(modelName + ':remove', function (item) {
+       * Syncs removed items on 'model:remove'
+       */
+      socket.on(modelName + ':remove', function(item) {
         var event = 'deleted';
-        _.remove(array, {_id: item._id});
+        _.remove(array, {
+          _id: item._id
+        });
         cb(event, item, array);
       });
     }
 
     /**
-    * Removes listeners for a models updates on the socket
-    *
-    * @param modelName
-    */
+     * Removes listeners for a models updates on the socket
+     *
+     * @param modelName
+     */
     function unsyncUpdates(modelName) {
       socket.removeAllListeners(modelName + ':save');
       socket.removeAllListeners(modelName + ':remove');

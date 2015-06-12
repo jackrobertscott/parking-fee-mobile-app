@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('socketMock')
-  .factory('socket', socket);
+    .module('socketMock')
+    .factory('socket', socket);
 
   socket.$inject = [];
 

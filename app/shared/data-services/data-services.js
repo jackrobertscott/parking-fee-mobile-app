@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('dataServices', [
-    'resources'
-  ]);
+    .module('dataServices', [
+      'resources'
+    ]);
 })();

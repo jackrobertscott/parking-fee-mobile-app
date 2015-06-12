@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('glitch')
-  .factory('glitch', glitch);
+    .module('glitch')
+    .factory('glitch', glitch);
 
   glitch.$inject = [];
 

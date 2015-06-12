@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('resources', [
-    'ngResource'
-  ]);
+    .module('resources', [
+      'ngResource'
+    ]);
 })();

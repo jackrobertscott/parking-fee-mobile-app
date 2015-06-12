@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('dataServices')
-  .factory('dataVehicle', dataVehicle);
+    .module('dataServices')
+    .factory('dataVehicle', dataVehicle);
 
   dataVehicle.$inject = ['ResourceVehicle'];
 
@@ -20,7 +20,9 @@
     return service;
 
     function getOne(id) {
-      return ResourceVehicle.get({id: id}).$promise;
+      return ResourceVehicle.get({
+        id: id
+      }).$promise;
     }
 
     function getMany() {
@@ -43,7 +45,9 @@
     }
 
     function getUserVehicles(id) {
-      return ResourceVehicle.getUserVehicles({id: id}).$promise;
+      return ResourceVehicle.getUserVehicles({
+        id: id
+      }).$promise;
     }
   }
 })();

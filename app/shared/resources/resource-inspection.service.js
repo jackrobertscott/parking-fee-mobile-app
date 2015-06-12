@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-  .module('resources')
-  .factory('ResourceInspection', ResourceInspection);
+    .module('resources')
+    .factory('ResourceInspection', ResourceInspection);
 
   ResourceInspection.$inject = ['$resource', 'ENV'];
 
   function ResourceInspection($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'api/inspections/:id/:action', {
+    return $resource(ENV.apiEndpoint + 'api/inspections/:id/:action', {
       id: '@_id'
     }, {
       update: {
