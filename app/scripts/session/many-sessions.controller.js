@@ -13,7 +13,6 @@
     vm.sessions = [];
     vm.glitch = glitch;
     vm.getFewUser = getFewUser;
-    vm.toDetails = toDetails;
 
     ////////////
 
@@ -31,12 +30,6 @@
           vm.sessions = sessions;
         })
         .catch(vm.glitch.handle);
-    }
-
-    function toDetails(session) {
-      $state.go('app.sessionDetails', {
-        id: session._id
-      });
     }
   }
 })();

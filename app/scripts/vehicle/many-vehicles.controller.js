@@ -15,7 +15,6 @@
     vm.getMany = getMany;
     vm.remove = remove;
     vm.getFewUser = getFewUser;
-    vm.toSettings = toSettings;
 
     ////////////
 
@@ -54,12 +53,6 @@
           vm.vehicles = vehicles;
         })
         .catch(vm.glitch.handle);
-    }
-
-    function toSettings(vehicle) {
-      $state.go('app.vehicleSettings', {
-        id: vehicle._id
-      });
     }
   }
 })();
