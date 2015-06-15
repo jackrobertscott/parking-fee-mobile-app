@@ -10,14 +10,15 @@
   function OneUserCtrl($state, glitch, Auth, dataUser) {
     var vm = this;
 
-    vm.glitch = glitch;
     vm.user = {};
+    vm.glitch = glitch;
     vm.getOne = getOne;
     vm.create = create;
     vm.login = login;
     vm.changePassword = changePassword;
     vm.update = update;
     vm.logout = logout;
+    vm.loginOauth = loginOauth;
 
     ////////////
 
@@ -73,6 +74,10 @@
     function logout() {
       Auth.logout();
       $state.go('app.userLogin');
+    }
+
+    function loginOauth(provider) {
+      Auth.loginOauth(provider);
     }
   }
 })();
