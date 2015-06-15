@@ -10,6 +10,7 @@
   function config($stateProvider) {
     $stateProvider
       .state('app.sessionUser', {
+        cache: false,
         url: '/session/user',
         views: {
           screen: {

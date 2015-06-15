@@ -4,7 +4,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="list" ng-init="vm.getFewUser()">
-      <div class="item" ng-repeat="vehicle in vm.vehicles" ui-sref="app.vehicleSettings({id: session._id})">
+      <div class="item" ng-repeat="vehicle in vm.vehicles" ui-sref="app.vehicleSettings({id: vehicle._id})">
         {{ vehicle.plate }}
       </div>
     </div>

@@ -58,7 +58,11 @@
     function changePassword() {
       Auth.changePassword(vm.user.oldPassword, vm.user.newPassword)
         .then(function() {
-          $state.go('app.userSettings');
+          $ionicPopup.alert({
+            title: 'Success',
+            template: 'Password updated'
+          });
+          vm.user = {};
         })
         .catch(vm.glitch.handle);
     }

@@ -10,6 +10,7 @@
   function config($stateProvider) {
     $stateProvider
       .state('app.vehicleUser', {
+        cache: false,
         url: '/vehicle/user',
         views: {
           screen: {

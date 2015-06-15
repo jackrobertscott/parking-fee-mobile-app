@@ -44,7 +44,7 @@
       });
       dataInspection.create(vm.inspection)
         .then(function(inspection) {
-          $state.go('inspection');
+          $state.go('app.inspectionCompany');
         })
         .catch(vm.glitch.handle);
     }
@@ -61,7 +61,7 @@
       dataInspection.remove(vm.inspection)
         .then(function() {
           vm.inspection = {};
-          $state.go('inspection');
+          $state.go('app.inspectionCompany');
         })
         .catch(vm.glitch.handle);
     }

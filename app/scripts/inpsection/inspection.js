@@ -10,6 +10,7 @@
   function config($stateProvider) {
     $stateProvider
       .state('app.inspectionUser', {
+        cache: false,
         url: '/inspection/user',
         views: {
           screen: {
@@ -22,6 +23,7 @@
         }
       })
       .state('app.inspectionCompany', {
+        cache: false,
         url: '/inspection/company',
         views: {
           screen: {
