@@ -9,23 +9,15 @@
 
   function config($stateProvider) {
     $stateProvider
-      .state('app.userRegister', {
-        url: '/user/register',
-        views: {
-          screen: {
-            templateUrl: 'templates/user/register.html',
-            controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
-          }
-        }
+      .state('register', {
+        url: '/register',
+        templateUrl: 'templates/user/register.html',
+        controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
       })
-      .state('app.userLogin', {
-        url: '/user/login',
-        views: {
-          screen: {
-            templateUrl: 'templates/user/login.html',
-            controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
-          }
-        }
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/user/login.html',
+        controller: 'OneUserCtrl as vm' // controllerAs does not work with ionic
       })
       .state('app.userLogout', {
         url: '/user/logout',

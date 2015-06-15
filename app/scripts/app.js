@@ -23,7 +23,7 @@
 
   function config($stateProvider, $urlRouterProvider, $httpProvider) {
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/user/login');
+    $urlRouterProvider.otherwise('/login');
     $httpProvider.interceptors.push('authInterceptor');
     //$httpProvider.interceptors.push('loadingInterceptor');
   }
@@ -71,8 +71,12 @@
     // Set handle function for glitch
     glitch.setHandle(function(err) {
       console.log(err);
-      var message = err.message || err.data || '';
-      glitch.setError(message);
+      var message = err.message || err.data;
+      if (!message || typeof message !== 'string') {
+        glitch.setError('Please recheck form');
+      } else {
+        glitch.setError(message);
+      }
       $rootScope.$broadcast('glitch:error');
     });
     // Listen for error and displat popup
@@ -112,7 +116,7 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/app/user/login');
+          $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);

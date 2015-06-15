@@ -5,9 +5,9 @@
     .module('mobileApp')
     .controller('OneUserCtrl', OneUserCtrl);
 
-  OneUserCtrl.$inject = ['$state', 'glitch', 'Auth', 'dataUser'];
+  OneUserCtrl.$inject = ['$state', 'glitch', 'Auth', 'dataUser', '$ionicPopup'];
 
-  function OneUserCtrl($state, glitch, Auth, dataUser) {
+  function OneUserCtrl($state, glitch, Auth, dataUser, $ionicPopup) {
     var vm = this;
 
     vm.user = {};
@@ -66,14 +66,17 @@
     function update() {
       dataUser.update(vm.user)
         .then(function() {
-          $state.go('app.vehicleUser');
+          $ionicPopup.alert({
+            title: 'Success',
+            template: 'Profile updated'
+          });
         })
         .catch(vm.glitch.handle);
     }
 
     function logout() {
       Auth.logout();
-      $state.go('app.userLogin');
+      $state.go('login');
     }
 
     function loginOauth(provider) {

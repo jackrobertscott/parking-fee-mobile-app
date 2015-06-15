@@ -26,12 +26,12 @@
       menu.reset();
       menu.addItem({
         label: 'Register',
-        direction: 'app.userRegister',
+        direction: 'register',
         maxRole: 'guest'
       });
       menu.addItem({
         label: 'Login',
-        direction: 'app.userLogin',
+        direction: 'login',
         maxRole: 'guest'
       });
       menu.addItem({
@@ -47,11 +47,6 @@
       menu.addItem({
         label: 'My Vehicles',
         direction: 'app.vehicleUser',
-        minRole: 'user'
-      });
-      menu.addItem({
-        label: 'New Vehicle',
-        direction: 'app.vehicleRegister',
         minRole: 'user'
       });
       menu.addItem({
