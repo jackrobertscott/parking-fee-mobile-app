@@ -1,15 +1,15 @@
 <ion-view view-title="Register">
   <ion-content>
     <form ng-submit="vm.create()">
-      <div class="list list-inset">
+      <div class="list">
         <label class="item item-input">
-          <input type="text" ng-model="vm.user.name" placeholder="Name">
+          <input ng-model="vm.user.name" placeholder="Name" type="text">
         </label>
         <label class="item item-input">
-          <input type="email" ng-model="vm.user.email" placeholder="Email">
+          <input ng-model="vm.user.email" placeholder="Email" type="email">
         </label>
         <label class="item item-input">
-          <input type="password" ng-model="vm.user.password" placeholder="Password">
+          <input ng-model="vm.user.password" placeholder="Password" type="password">
         </label>
       </div>
       <div class="padding">

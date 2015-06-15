@@ -40,11 +40,5 @@
         })
         .catch(vm.glitch.handle);
     }
-
-    function toDetails(item) {
-      $state.go('app.inspectionDetail', {
-        id: item._id
-      });
-    }
   }
 })();

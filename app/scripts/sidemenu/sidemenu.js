@@ -13,7 +13,7 @@
         url: '/app',
         abstract: true,
         templateUrl: 'templates/sidemenu/sidemenu.html',
-        controller: 'SidemenuCtrl as vm', // controllerAs does not work with ionic
+        controller: 'SidemenuCtrl as vmMenu', // controllerAs does not work with ionic
         resolve: {
           currentUser: currentUser // load the user before loading controllers
         }

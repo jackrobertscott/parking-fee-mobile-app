@@ -88,7 +88,7 @@
     $rootScope.$on('loading:show', function() {
       console.log('loading:show');
       $ionicLoading.show({
-        template: 'foo'
+        template: 'Loading...'
       });
     });
     $rootScope.$on('loading:hide', function() {

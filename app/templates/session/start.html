@@ -1,7 +1,7 @@
 <ion-view view-title="Umami">
   <ion-content>
     <form ng-submit="vm.startSession()">
-      <div class="list list-inset">
+      <div class="list">
         <label class="item item-input item-select" ng-init="vm.getUserVehicles()">
           <div class="input-label">Vehicle</div>
           <select ng-model="vm.session.vehicle" ng-options="vehicle.plate for vehicle in vm.vehicles"></select>

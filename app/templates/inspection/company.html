@@ -1,9 +1,10 @@
 <ion-view view-title="Company Inspections">
   <ion-content>
-    <div class="list list-inset" ng-init="vm.getFewCompany()">
-      <a class="item" ng-repeat="inspection in vm.inspections" ng-click="vm.toDetails(inspection)">
+    <div class="list" ng-init="vm.getFewCompany()">
+      <a class="item" ng-repeat="inspection in vm.inspections" ui-sref="app.inspectionDetail({id: inspection._id})">
         <h2>{{ inspection.plate }}</h2>
-        <p>{{ inspection.created | date:'shortTime' }}</p>
+        <p><strong>Inspected at:</strong> {{ inspection.created | date:'short' }}</p>
       </a>
+    </div>
   </ion-content>
 </ion-view>
