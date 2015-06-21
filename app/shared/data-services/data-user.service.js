@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('dataServices')
-  .factory('dataUser', dataUser);
+    .module('dataServices')
+    .factory('dataUser', dataUser);
 
   dataUser.$inject = ['ResourceUser'];
 
@@ -22,7 +22,9 @@
     return service;
 
     function getOne(id) {
-      return ResourceUser.get({id: id}).$promise;
+      return ResourceUser.get({
+        id: id
+      }).$promise;
     }
 
     function getMany() {
@@ -45,7 +47,9 @@
     }
 
     function getCompanyMembers(id) {
-      return ResourceUser.getCompanyMembers({id: id}).$promise;
+      return ResourceUser.getCompanyMembers({
+        id: id
+      }).$promise;
     }
 
     function addCompanyMember(body, companyId, role) {

@@ -1,12 +1,12 @@
 <ion-view view-title="Profile">
   <ion-content>
     <form ng-init="vm.getOne()" ng-submit="vm.update()">
-      <div class="list list-inset">
+      <div class="list">
         <label class="item item-input">
-          <input type="text" ng-model="vm.user.name" placeholder="Name">
+          <input ng-model="vm.user.name" placeholder="Name" type="text">
         </label>
         <label class="item item-input">
-          <input type="text" ng-model="vm.user.phone" placeholder="Phone Number">
+          <input ng-model="vm.user.phone" placeholder="Phone Number" type="text">
         </label>
       </div>
       <div class="padding">

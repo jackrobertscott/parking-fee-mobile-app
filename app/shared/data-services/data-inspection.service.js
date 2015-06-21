@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('dataServices')
-  .factory('dataInspection', dataInspection);
+    .module('dataServices')
+    .factory('dataInspection', dataInspection);
 
   dataInspection.$inject = ['ResourceInspection'];
 
@@ -21,7 +21,9 @@
     return service;
 
     function getOne(id) {
-      return ResourceInspection.get({id: id}).$promise;
+      return ResourceInspection.get({
+        id: id
+      }).$promise;
     }
 
     function getMany() {
@@ -44,11 +46,15 @@
     }
 
     function getUserInfringed(id) {
-      return ResourceInspection.getUserInfringed({id: id}).$promise;
+      return ResourceInspection.getUserInfringed({
+        id: id
+      }).$promise;
     }
 
     function getFewCompany(id) {
-      return ResourceInspection.getFewCompany({id: id}).$promise;
+      return ResourceInspection.getFewCompany({
+        id: id
+      }).$promise;
     }
   }
 })();

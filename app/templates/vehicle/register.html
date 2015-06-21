@@ -1,9 +1,9 @@
-<ion-view view-title="New Vehicle">
+<ion-view view-title="New">
   <ion-content>
     <form ng-submit="vm.create()">
-      <div class="list list-inset">
+      <div class="list">
         <label class="item item-input">
-          <input type="text" ng-model="vm.vehicle.plate" placeholder="Registration Number">
+          <input ng-model="vm.vehicle.plate" placeholder="Registration Number" type="text">
         </label>
         <label class="item item-input item-select">
           <div class="input-label">Make</div>

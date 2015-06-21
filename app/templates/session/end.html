@@ -1,0 +1,27 @@
+<ion-view view-title="Sessions">
+  <ion-content>
+    <div class="list" ng-init="vm.getOne()">
+      <div class="item item-divider">
+        Start Time
+      </div>
+      <a class="item">
+        {{ vm.session.start | date:'shortTime' }}
+      </a>
+      <div class="item item-divider">
+        Time So Far
+      </div>
+      <a class="item">
+        {{ Date.now - vm.session.start | date:'h:mm' }}
+      </a>
+      <div class="item item-divider">
+        Current Payment
+      </div>
+      <a class="item">
+        {{ vm.session.location.rate * (Date.now - vm.session.start) / 3600 | currency }}
+      </a>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="vm.endSession()">End Session</button>
+    </div>
+  </ion-content>
+</ion-view>

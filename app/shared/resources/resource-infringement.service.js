@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-  .module('resources')
-  .factory('ResourceInfringement', ResourceInfringement);
+    .module('resources')
+    .factory('ResourceInfringement', ResourceInfringement);
 
   ResourceInfringement.$inject = ['$resource', 'ENV'];
 
   function ResourceInfringement($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'api/infringements/:id/:action', {
+    return $resource(ENV.apiEndpoint + 'api/infringements/:id/:action', {
       id: '@_id'
     }, {
       update: {

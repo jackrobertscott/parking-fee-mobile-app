@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('socket', [
-    'btford.socket-io'
-  ]);
+    .module('socket', [
+      'btford.socket-io'
+    ]);
 })();

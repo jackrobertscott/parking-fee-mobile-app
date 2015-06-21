@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('dataServices')
-  .factory('dataSession', dataSession);
+    .module('dataServices')
+    .factory('dataSession', dataSession);
 
   dataSession.$inject = ['ResourceSession'];
 
@@ -20,7 +20,9 @@
     return service;
 
     function getOne(id) {
-      return ResourceSession.get({id: id}).$promise;
+      return ResourceSession.get({
+        id: id
+      }).$promise;
     }
 
     function getMany() {
@@ -43,7 +45,9 @@
     }
 
     function getFewUser(id) {
-      return ResourceSession.getFewUser({id: id}).$promise;
+      return ResourceSession.getFewUser({
+        id: id
+      }).$promise;
     }
   }
 })();

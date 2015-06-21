@@ -1,17 +1,23 @@
-<ion-view view-title="Login">
-  <ion-content>
-    <form ng-submit="vm.login()">
-      <div class="list list-inset">
-        <label class="item item-input">
-          <input type="email" ng-model="vm.user.email" placeholder="Email">
-        </label>
-        <label class="item item-input">
-          <input type="password" ng-model="vm.user.password" placeholder="Password">
-        </label>
-      </div>
-      <div class="padding">
-        <button class="button button-block button-positive" type="submit">Login</button>
-      </div>
-    </form>
-  </ion-content>
-</ion-view>
+<div class="bar bar-header bar-stable">
+  <h1 class="title">Login</h1>
+</div>
+<ion-content class="has-header">
+  <form ng-submit="vm.login()">
+    <div class="list">
+      <label class="item item-input">
+        <input ng-model="vm.user.email" placeholder="Email" type="email">
+      </label>
+      <label class="item item-input">
+        <input ng-model="vm.user.password" placeholder="Password" type="password">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" type="submit">
+        Login
+      </button>
+      <a class="button button-block button-clear button-positive" ui-sref="register">
+        Sign up
+      </a>
+    </div>
+  </form>
+</ion-content>

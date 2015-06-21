@@ -2,13 +2,13 @@
   'use strict';
 
   angular
-  .module('resources')
-  .factory('ResourceUser', ResourceUser);
+    .module('resources')
+    .factory('ResourceUser', ResourceUser);
 
   ResourceUser.$inject = ['$resource', 'ENV'];
 
   function ResourceUser($resource, ENV) {
-    return $resource(ENV.apiEndpoint+'api/users/:id/:action', {
+    return $resource(ENV.apiEndpoint + 'api/users/:id/:action', {
       id: '@_id'
     }, {
       get: {

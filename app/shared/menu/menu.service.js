@@ -2,8 +2,8 @@
   'use strict';
 
   angular
-  .module('menu')
-  .factory('menu', menu);
+    .module('menu')
+    .factory('menu', menu);
 
   menu.$inject = ['Auth', '$state'];
 
@@ -39,6 +39,7 @@
         direction: object.direction || '',
         minRole: setRole(object.minRole),
         maxRole: setRole(object.maxRole),
+        data: object.data || {},
         children: []
       };
       return item;
@@ -56,10 +57,12 @@
     }
 
     function filter(userRole, list) {
-      if (!list || !list.length) {return [];}
+      if (!list || !list.length) {
+        return [];
+      }
       return list.filter(function(item) {
         return (!item.minRole || beforeOrEqual(item.minRole, userRole)) &&
-        (!item.maxRole || beforeOrEqual(userRole, item.maxRole));
+          (!item.maxRole || beforeOrEqual(userRole, item.maxRole));
       });
     }
 
