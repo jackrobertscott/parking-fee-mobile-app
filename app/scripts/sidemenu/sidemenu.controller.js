@@ -35,18 +35,23 @@
         maxRole: 'guest'
       });
       menu.addItem({
+        label: 'Park',
+        direction: 'app.sessionStart',
+        minRole: 'user'
+      });
+      menu.addItem({
         label: 'Profile',
         direction: 'app.userSettings',
         minRole: 'user'
       });
       menu.addItem({
-        label: 'Change Password',
-        direction: 'app.userPassword',
+        label: 'Vehicles',
+        direction: 'app.vehicleUser',
         minRole: 'user'
       });
       menu.addItem({
-        label: 'My Vehicles',
-        direction: 'app.vehicleUser',
+        label: 'Sessions',
+        direction: 'app.sessionUser',
         minRole: 'user'
       });
       menu.addItem({

@@ -8,7 +8,7 @@
   ResourceCompany.$inject = ['$resource', 'ENV'];
 
   function ResourceCompany($resource, ENV) {
-    return $resource(ENV.apiEndpoint + 'api/companies/:id/:action', {
+    return $resource(ENV.apiEndpoint + 'api/companys/:id/:action', {
       id: '@_id'
     }, {
       update: {
