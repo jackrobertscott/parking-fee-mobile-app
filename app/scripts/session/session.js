@@ -23,6 +23,7 @@
         }
       })
       .state('app.sessionStart', {
+        cache: false,
         url: '/session/start',
         views: {
           screen: {
@@ -35,6 +36,7 @@
         }
       })
       .state('app.sessionEnd', {
+        cache: false,
         url: '/session/end/:id',
         views: {
           screen: {
@@ -47,6 +49,7 @@
         }
       })
       .state('app.sessionDetail', {
+        cache: false,
         url: '/session/detail/:id',
         views: {
           screen: {

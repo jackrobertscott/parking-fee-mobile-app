@@ -1,29 +1,23 @@
-<ion-view view-title="Details">
+<ion-view view-title="Session">
   <ion-content>
     <div class="list" ng-init="vm.getOne()">
       <div class="item item-divider">
-        Vehicle Registration Number
+        Started
       </div>
       <a class="item">
-        {{ vm.inspection.plate }}
+        {{ vm.session.start | date:'shortTime' }}
       </a>
       <div class="item item-divider">
-        Infringement
+        Time Parked
       </div>
       <a class="item">
-        {{ vm.inspection.infringement.name }}
-      </a>
-      <div class="item item-divider" ng-if="vm.inspection.infringement.info != ''">
-        Infringement Description
-      </div>
-      <a class="item" ng-if="vm.inspection.infringement.info != ''">
-        {{ vm.inspection.infringement.info }}
+        {{ vm.session.time | date:'h:mm'}}
       </a>
       <div class="item item-divider">
-        Payment Due
+        Paid
       </div>
       <a class="item">
-        {{ vm.inspection.infringement.payment }}
+        {{ vm.session.payment | currency }}
       </a>
     </div>
   </ion-content>

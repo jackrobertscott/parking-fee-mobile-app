@@ -67,13 +67,14 @@
     function startSession() {
       // should: form validation check
       var user = Auth.getCurrentUser();
-      angular.extend(vm.session, {
-        _creator: user._id,
-        vehicle: vm.session.vehicle._id,
+      var session = {
         start: Date.now(),
-        end: Date.now() + vm.session.time.value
-      });
-      dataSession.create(vm.session)
+        time: vm.session.time.value,
+        payment: vm.session.location.rate * vm.session.time.value / 3600,
+        vehicle: vm.session.vehicle._id,
+        _creator: user._id
+      };
+      dataSession.create(session)
         .then(function(session) {
           $state.go('app.sessionEnd', {
             id: session._id
@@ -84,12 +85,13 @@
 
     function endSession() {
       var user = Auth.getCurrentUser();
-      angular.extend(vm.session, {
-        end: Date.now()
-      });
+      console.log();
+      vm.session.time = Date.now() - new Date(vm.session.start).getTime();
       dataSession.update(vm.session)
         .then(function(session) {
-          $state.go('app.session');
+          $state.go('app.sessionDetail', {
+            id: session._id
+          });
         })
         .catch(vm.glitch.handle);
     }
