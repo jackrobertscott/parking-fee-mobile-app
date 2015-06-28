@@ -8,6 +8,7 @@
   Auth.$inject = ['$location', '$rootScope', '$http', 'ResourceUser', '$cookieStore', '$q', '$window', 'glitch', 'ENV'];
 
   function Auth($location, $rootScope, $http, ResourceUser, $cookieStore, $q, $window, glitch, ENV) {
+    var _this = this;
     var currentUser = {};
     if ($cookieStore.get('token')) {
       currentUser = ResourceUser.get();
@@ -46,11 +47,11 @@
           });
         })
         .error(function(err) {
-            this.logout();
+            logout();
             deferred.reject(err);
             return cb(err);
           }
-          .bind(this));
+          .bind(_this));
 
       return deferred.promise;
     }
@@ -65,8 +66,8 @@
         $cookieStore.put('token', data.token);
         currentUser = ResourceUser.get();
       }, function() {
-        this.logout();
-      }.bind(this)).$promise;
+        logout();
+      }.bind(_this)).$promise;
     }
 
     function changePassword(oldPassword, newPassword) {
@@ -116,7 +117,7 @@
 
     function getUserRoles() {
       // These should mirror roles on server side environment
-      return ['guest', 'user', 'inspector', 'company', 'admin'];
+      return ['guest', 'user', 'inspector', 'independent', 'company', 'admin'];
     }
 
     function reloadUser(cb) {
