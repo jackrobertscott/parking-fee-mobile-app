@@ -26,12 +26,13 @@
     activate();
 
     function activate() {
-      for (var i = 30; i < 12 * 60; i + 30) { // need to make sure not longer than limits
+      for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
-          label: String(i + ' mins'),
-          value: i
+          label: String(i*30 + ' mins'),
+          value: i*30*60
         });
       }
+      vm.session.time = vm.times[0];
     }
 
     ////////////
@@ -49,6 +50,7 @@
       dataVehicle.getUserVehicles(Auth.getCurrentUser()._id)
         .then(function(vehicles) {
           vm.vehicles = vehicles;
+          vm.session.vehicle = vm.vehicles[0];
         })
         .catch(vm.glitch.handle);
     }
@@ -57,18 +59,19 @@
       dataLocation.getMany()
         .then(function(locations) {
           vm.locations = locations;
+          vm.session.location = vm.locations[0];
         })
         .catch(vm.glitch.handle);
     }
 
-    function startSession(form) {
+    function startSession() {
       // should: form validation check
       var user = Auth.getCurrentUser();
       angular.extend(vm.session, {
         _creator: user._id,
         vehicle: vm.session.vehicle._id,
-        start: Date.now,
-        end: Date.now + vm.session.time.value
+        start: Date.now(),
+        end: Date.now() + vm.session.time.value
       });
       dataSession.create(vm.session)
         .then(function(session) {
@@ -79,10 +82,10 @@
         .catch(vm.glitch.handle);
     }
 
-    function endSession(form) {
+    function endSession() {
       var user = Auth.getCurrentUser();
       angular.extend(vm.session, {
-        end: Date.now
+        end: Date.now()
       });
       dataSession.update(vm.session)
         .then(function(session) {

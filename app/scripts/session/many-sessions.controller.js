@@ -25,7 +25,7 @@
     ////////////
 
     function getFewUser() {
-      dataSession.getUserSessions(Auth.getCurrentUser()._id)
+      dataSession.getFewUser(Auth.getCurrentUser()._id)
         .then(function(sessions) {
           vm.sessions = sessions;
         })
