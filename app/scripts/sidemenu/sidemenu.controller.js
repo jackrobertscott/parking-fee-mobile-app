@@ -40,11 +40,6 @@
         minRole: 'user'
       });
       menu.addItem({
-        label: 'Change Password',
-        direction: 'app.userPassword',
-        minRole: 'user'
-      });
-      menu.addItem({
         label: 'My Vehicles',
         direction: 'app.vehicleUser',
         minRole: 'user'
