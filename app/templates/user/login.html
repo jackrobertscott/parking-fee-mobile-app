@@ -1,0 +1,19 @@
+<div class="bar bar-header bar-stable">
+  <h1 class="title">Login</h1>
+</div>
+<ion-content class="has-header">
+  <form ng-submit="vm.login()">
+    <div class="list">
+      <label class="item item-input">
+        <input ng-model="vm.user.email" placeholder="Email" type="email">
+      </label>
+      <label class="item item-input">
+        <input ng-model="vm.user.password" placeholder="Password" type="password">
+      </label>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" type="submit">Login</button>
+      <a class="button button-block button-clear button-positive" ui-sref="register">Sign up</a>
+    </div>
+  </form>
+</ion-content>

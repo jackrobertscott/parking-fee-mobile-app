@@ -21,7 +21,7 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: 'app',
-      scripts: 'scripts',
+      scripts: '{scripts,shared}',
       styles: 'styles',
       images: 'images',
       test: 'test',
@@ -37,13 +37,13 @@ module.exports = function (grunt) {
         space: '  ',
         wrap: '"use strict";\n\n {%= __ngModule %}',
         name: 'config',
-        dest: '<%= yeoman.app %>/<%= yeoman.scripts %>/configuration.js'
+        dest: '<%= yeoman.app %>/scripts/config.js'
       },
       development: {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://dev.yoursite.com:10000/'
+            apiEndpoint: 'http://localhost:9000/'
           }
         }
       },
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://api.yoursite.com/'
+            apiEndpoint: 'http://localhost:9000/'
           }
         }
       }
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost'
       },
@@ -95,7 +95,7 @@ module.exports = function (grunt) {
       },
       coverage: {
         options: {
-          port: 9002,
+          port: 8002,
           open: true,
           base: ['coverage']
         }
@@ -425,7 +425,11 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.app %>/index.html': [
-            '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js'
+            '<%= yeoman.app %>/scripts/**/*.js',
+            '!<%= yeoman.app %>/scripts/app.js',
+            '!<%= yeoman.app %>/scripts/config.js',
+            '!<%= yeoman.app %>/scripts/**/*.spec.js',
+            '!<%= yeoman.app %>/scripts/**/*.mock.js',
           ],
         }
       },

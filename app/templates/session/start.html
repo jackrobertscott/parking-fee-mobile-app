@@ -1,0 +1,23 @@
+<ion-view view-title="UmamiPark">
+  <ion-content>
+    <form ng-submit="vm.startSession()">
+      <div class="list">
+        <label class="item item-input item-select" ng-init="vm.getUserVehicles()">
+          <div class="input-label">Vehicle</div>
+          <select ng-model="vm.session.vehicle" ng-options="vehicle.plate for vehicle in vm.vehicles"></select>
+        </label>
+        <label class="item item-input item-select" ng-init="vm.getLocations()">
+          <div class="input-label">Location</div>
+          <select ng-model="vm.session.location" ng-options="location.name for location in vm.locations"></select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">Safety Limit</div>
+          <select ng-model="vm.session.time" ng-options="time.label for time in vm.times"></select>
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-positive" type="submit">Start</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>

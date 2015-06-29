@@ -2,30 +2,64 @@
   'use strict';
 
   angular
-  .module('mobileApp')
-  .controller('SidemenuCtrl', SidemenuCtrl);
+    .module('mobileApp')
+    .controller('SidemenuCtrl', SidemenuCtrl);
 
-  SidemenuCtrl.$inject = ['$scope', 'SidemenuItem'];
+  SidemenuCtrl.$inject = ['$scope', 'Auth', 'menu'];
 
-  function SidemenuCtrl($scope, SidemenuItem) {
+  function SidemenuCtrl($scope, Auth, menu) {
     var vm = this;
 
     vm.sidemenu = [];
 
+    ////////////
+
     activate();
 
     function activate() {
-      vm.sidemenu = sidemenu();
+      vm.sidemenu = createMenu();
     }
 
-    function sidemenu() {
-      return [
-        new SidemenuItem('Example', 'app.example'),
-        new SidemenuItem('Login'),
-        new SidemenuItem(),
-        new SidemenuItem(),
-        new SidemenuItem()
-      ];
+    ////////////
+
+    function createMenu() {
+      menu.reset();
+      menu.addItem({
+        label: 'Register',
+        direction: 'register',
+        maxRole: 'guest'
+      });
+      menu.addItem({
+        label: 'Login',
+        direction: 'login',
+        maxRole: 'guest'
+      });
+      menu.addItem({
+        label: 'Park',
+        direction: 'app.sessionStart',
+        minRole: 'user'
+      });
+      menu.addItem({
+        label: 'Profile',
+        direction: 'app.userSettings',
+        minRole: 'user'
+      });
+      menu.addItem({
+        label: 'Vehicles',
+        direction: 'app.vehicleUser',
+        minRole: 'user'
+      });
+      menu.addItem({
+        label: 'Sessions',
+        direction: 'app.sessionUser',
+        minRole: 'user'
+      });
+      menu.addItem({
+        label: 'Logout',
+        direction: 'app.userLogout',
+        minRole: 'user'
+      });
+      return menu.getItems();
     }
   }
 })();

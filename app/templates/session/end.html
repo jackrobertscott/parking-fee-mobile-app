@@ -1,0 +1,27 @@
+<ion-view view-title="Session">
+  <ion-content>
+    <div class="list" ng-init="vm.getOne()">
+      <div class="item item-divider">
+        Started
+      </div>
+      <a class="item">
+        {{ vm.session.start | date:'shortTime' }}
+      </a>
+      <div class="item item-divider">
+        Time Parked
+      </div>
+      <a class="item">
+        {{ vm.session.time }}
+      </a>
+      <div class="item item-divider">
+        Currently Paid
+      </div>
+      <a class="item">
+        {{ vm.session.payment | currency }}
+      </a>
+    </div>
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="vm.endSession()">End Session</button>
+    </div>
+  </ion-content>
+</ion-view>
