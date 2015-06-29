@@ -32,7 +32,7 @@
           value: i * 30 * 60
         });
       }
-      vm.session.time = vm.times[0];
+      vm.session.time = vm.times[5];
     }
 
     ////////////
@@ -69,7 +69,7 @@
       var user = Auth.getCurrentUser();
       var session = {
         start: Date.now(),
-        time: vm.session.time.value,
+        end: Date.now() + vm.session.time.value * 1000,
         payment: vm.session.location.rate * vm.session.time.value / 3600,
         vehicle: vm.session.vehicle._id,
         location: vm.session.location._id,
@@ -86,10 +86,11 @@
 
     function endSession() {
       var user = Auth.getCurrentUser();
-      console.log();
+      var hours = Math.round((Date.now() - Date.parse(vm.session.start)) / (1000 * 3600));
       dataSession.update({
           _id: vm.session._id,
-          time: Date.now() - new Date(vm.session.start).getTime(),
+          end: Date.now(),
+          payment: vm.session.location.rate * hours,
         })
         .then(function(session) {
           $state.go('app.sessionStart', {

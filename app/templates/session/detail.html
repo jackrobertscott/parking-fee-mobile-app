@@ -2,12 +2,6 @@
   <ion-content>
     <div class="list" ng-init="vm.getOne()">
       <div class="item item-divider">
-        Started
-      </div>
-      <a class="item">
-        {{ vm.session.start | date:'shortTime' }}
-      </a>
-      <div class="item item-divider">
         Vehicle
       </div>
       <a class="item">
@@ -23,7 +17,7 @@
         Time Parked
       </div>
       <a class="item">
-        {{ vm.session.time | date:'h:mm'}}
+        {{ vm.session.start | date: "shortTime" }} - {{ vm.session.end | date: "shortTime" }}
       </a>
       <div class="item item-divider">
         Paid
