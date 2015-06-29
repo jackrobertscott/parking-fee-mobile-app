@@ -8,6 +8,18 @@
         {{ vm.session.start | date:'shortTime' }}
       </a>
       <div class="item item-divider">
+        Vehicle
+      </div>
+      <a class="item">
+        {{ vm.session.vehicle.plate }}
+      </a>
+      <div class="item item-divider">
+        Location
+      </div>
+      <a class="item">
+        {{ vm.session.location.name }}
+      </a>
+      <div class="item item-divider">
         Time Parked
       </div>
       <a class="item">

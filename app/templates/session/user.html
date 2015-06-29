@@ -3,8 +3,9 @@
     <div class="list" ng-init="vm.getFewUser()">
       <a class="item" ng-repeat="session in vm.sessions" ui-sref="app.sessionDetail({id: session._id})">
         <h2>{{ session.vehicle.plate }}</h2>
-        <p><strong>Time:</strong> {{ session.start | date:'shortTime' }} - {{ session.end | date:'shortTime' }}</p>
-        <p><strong>Payment</strong> {{ session.payment | currency }}</p>
+        <p><strong>Time:</strong> {{ session.time }}</p>
+        <p><strong>Location:</strong> {{ session.location.name }}</p>
+        <p><strong>Payment:</strong> {{ session.payment | currency }}</p>
       </a>
     </div>
   </ion-content>

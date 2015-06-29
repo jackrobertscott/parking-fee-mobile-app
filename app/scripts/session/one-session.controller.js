@@ -28,8 +28,8 @@
     function activate() {
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
-          label: String(i*30 + ' mins'),
-          value: i*30*60
+          label: String(i * 30 + ' mins'),
+          value: i * 30 * 60
         });
       }
       vm.session.time = vm.times[0];
@@ -72,6 +72,7 @@
         time: vm.session.time.value,
         payment: vm.session.location.rate * vm.session.time.value / 3600,
         vehicle: vm.session.vehicle._id,
+        location: vm.session.location._id,
         _creator: user._id
       };
       dataSession.create(session)
@@ -86,10 +87,12 @@
     function endSession() {
       var user = Auth.getCurrentUser();
       console.log();
-      vm.session.time = Date.now() - new Date(vm.session.start).getTime();
-      dataSession.update(vm.session)
+      dataSession.update({
+          _id: vm.session._id,
+          time: Date.now() - new Date(vm.session.start).getTime(),
+        })
         .then(function(session) {
-          $state.go('app.sessionDetail', {
+          $state.go('app.sessionStart', {
             id: session._id
           });
         })
