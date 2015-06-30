@@ -5,7 +5,10 @@
   <ion-content>
     <div class="list" ng-init="vm.getFewUser()">
       <a class="item" ng-repeat="vehicle in vm.vehicles" ui-sref="app.vehicleSettings({id: vehicle._id})">
-        {{ vehicle.plate }}
+        <h2>{{ vehicle.plate }}</h2>
+        <p><strong>Make:</strong> {{ vehicle.make }}</p>
+        <p><strong>Type:</strong> {{ vehicle.type }}</p>
+        <p><strong>Colour:</strong> {{ vehicle.color }}</p>
       </a>
     </div>
   </ion-content>

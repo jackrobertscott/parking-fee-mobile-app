@@ -8,11 +8,11 @@
         </label>
         <label class="item item-input item-select" ng-init="vm.getLocations()">
           <div class="input-label">Location</div>
-          <select ng-model="vm.session.location" ng-options="location.name for location in vm.locations"></select>
+          <select ng-model="vm.session.location" ng-options="(location.address + ' ' + location.suburb) for location in vm.locations"></select>
         </label>
         <label class="item item-input item-select">
           <div class="input-label">Safety Limit</div>
-          <select ng-model="vm.session.time" ng-options="time.label for time in vm.times"></select>
+          <select ng-model="vm.session.time" ng-options="time.value as time.label for time in vm.times"></select>
         </label>
       </div>
       <div class="padding">

@@ -29,10 +29,10 @@
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
           label: String(i * 30 + ' mins'),
-          value: i * 30 * 60
+          value: i * 30 * 60 * 1000 // Milliseconds (like from Date object)
         });
       }
-      vm.session.time = vm.times[5];
+      vm.session.time = vm.times[5].value;
     }
 
     ////////////
@@ -65,28 +65,34 @@
     }
 
     function startSession() {
-      // should: form validation check
-      var user = Auth.getCurrentUser();
-      var session = {
-        start: Date.now(),
-        end: Date.now() + vm.session.time.value * 1000,
-        payment: vm.session.location.rate * vm.session.time.value / 3600,
-        vehicle: vm.session.vehicle._id,
-        location: vm.session.location._id,
-        _creator: user._id
-      };
-      dataSession.create(session)
-        .then(function(session) {
-          $state.go('app.sessionEnd', {
-            id: session._id
-          });
-        })
-        .catch(vm.glitch.handle);
+      if (!vm.session.vehicle || !vm.session.location || !vm.session.time) {
+        vm.glitch.handle({
+          message: 'Form missing fields'
+        });
+      } else {
+        // should: form validation check
+        var user = Auth.getCurrentUser();
+        var session = {
+          start: Date.now(),
+          end: Date.now() + vm.session.time,
+          payment: vm.session.location.rate * vm.session.time / (3600 * 1000),
+          vehicle: vm.session.vehicle._id,
+          location: vm.session.location._id,
+          _creator: user._id
+        };
+        dataSession.create(session)
+          .then(function(session) {
+            $state.go('app.sessionEnd', {
+              id: session._id
+            });
+          })
+          .catch(vm.glitch.handle);
+      }
     }
 
     function endSession() {
       var user = Auth.getCurrentUser();
-      var hours = Math.round((Date.now() - Date.parse(vm.session.start)) / (1000 * 3600));
+      var hours = (Date.now() - Date.parse(vm.session.start)) / (3600 * 1000);
       dataSession.update({
           _id: vm.session._id,
           end: Date.now(),
