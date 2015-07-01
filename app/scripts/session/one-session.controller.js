@@ -28,20 +28,14 @@
     activate();
 
     function activate() {
-      if ($window.localStorage['currentSession']) {
-        $state.go('app.sessionEnd', {
-          id: $window.localStorage['currentSession']
-        });
-      } else {
-        vm.map = {
-          center: {
-            latitude: -31.9546529,
-            longitude: 115.852662
-          },
-          zoom: 10
-        };
-        mapToLocation();
-      }
+      vm.map = {
+        center: {
+          latitude: -31.9546529,
+          longitude: 115.852662
+        },
+        zoom: 10
+      };
+      mapToLocation();
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
           label: String(i * 30 + ' mins'),
@@ -131,7 +125,7 @@
     function mapToLocation() {
       $ionicPlatform.ready(function() {
         var options = {
-          timeout: 10000,
+          timeout: 10000, // Maximum time until it errors out
           enableHighAccuracy: false
         };
         $cordovaGeolocation.getCurrentPosition(options)

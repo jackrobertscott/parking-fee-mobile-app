@@ -35,9 +35,9 @@
     });
   }
 
-  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
+  allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch', '$window', '$state'];
 
-  function allowAccess($rootScope, $location, Auth, glitch) {
+  function allowAccess($rootScope, $location, Auth, glitch, $window, $state) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
       glitch.reset();
@@ -45,15 +45,22 @@
         if (toState.data && toState.data.role && toState.data.role !== 'guest') {
           var userRoles = Auth.getUserRoles();
           if (!loggedIn) {
-            $location.path('/app/user/login');
+            event.preventDefault();
+            $state.go('login');
             glitch.handle({
               message: 'Not authorised to access screen'
             });
           } else if (userRoles.indexOf(toState.data.role) > userRoles.indexOf(Auth.getCurrentUser().role)) {
             // Logged in but not authorised
-            $location.path('/app/session/start');
+            event.preventDefault();
+            $state.go('app.userSettings');
             glitch.handle({
               message: 'Not authorised to access screen'
+            });
+          } else if (toState.name === 'app.sessionStart' && $window.localStorage['currentSession']) {
+            event.preventDefault();
+            $state.go('app.sessionEnd', {
+              id: $window.localStorage['currentSession']
             });
           }
         }
@@ -107,9 +114,9 @@
     });
   }
 
-  authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$location'];
+  authInterceptor.$inject = ['$rootScope', '$q', '$cookieStore', '$injector'];
 
-  function authInterceptor($rootScope, $q, $cookieStore, $location) {
+  function authInterceptor($rootScope, $q, $cookieStore, $injector) {
     return {
       // Add authorization token to headers
       request: function(config) {
@@ -123,9 +130,9 @@
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if (response.status === 401) {
-          $location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
+          $injector.get('$state').go('login');
           return $q.reject(response);
         } else {
           return $q.reject(response);
