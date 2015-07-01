@@ -41,7 +41,7 @@
       mapToLocation();
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
-          label: String(i * 30 + ' mins'),
+          label: String(i / 2 + ' hours'),
           value: i * 30 * 60 * 1000 // Milliseconds (like from Date object)
         });
       }
