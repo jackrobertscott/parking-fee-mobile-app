@@ -5,12 +5,13 @@
     .module('mobileApp')
     .controller('OneSessionCtrl', OneSessionCtrl);
 
-  OneSessionCtrl.$inject = ['dataSession', 'glitch', 'Auth', '$state', '$stateParams', 'dataVehicle', 'dataLocation'];
+  OneSessionCtrl.$inject = ['dataSession', 'glitch', 'Auth', '$state', '$stateParams', 'dataVehicle', 'dataLocation', '$ionicPlatform', '$cordovaGeolocation'];
 
-  function OneSessionCtrl(dataSession, glitch, Auth, $state, $stateParams, dataVehicle, dataLocation) {
+  function OneSessionCtrl(dataSession, glitch, Auth, $state, $stateParams, dataVehicle, dataLocation, $ionicPlatform, $cordovaGeolocation) {
     var vm = this;
 
     vm.session = {};
+    vm.map = {};
     vm.vehicles = [];
     vm.locations = [];
     vm.times = [];
@@ -20,12 +21,21 @@
     vm.getLocations = getLocations;
     vm.startSession = startSession;
     vm.endSession = endSession;
+    vm.markerClick = markerClick;
 
     ////////////
 
     activate();
 
     function activate() {
+      vm.map = {
+        center: {
+          latitude: -31.9546529,
+          longitude: 115.852662
+        },
+        zoom: 10
+      };
+      mapToLocation();
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
           label: String(i * 30 + ' mins'),
@@ -104,6 +114,29 @@
           });
         })
         .catch(vm.glitch.handle);
+    }
+
+    function mapToLocation() {
+      $ionicPlatform.ready(function() {
+        var options = {
+          timeout: 10000,
+          enableHighAccuracy: false
+        };
+        $cordovaGeolocation.getCurrentPosition(options)
+          .then(function(position) {
+            vm.map.center = {
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            };
+          }, function(err) {
+            // error
+          });
+      });
+    }
+
+    function markerClick(marker, event, object) {
+      // Not working atm.. need to add data-tap-disable="true" to map div
+      vm.location = object;
     }
   }
 })();

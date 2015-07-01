@@ -6,7 +6,9 @@
       'ngCookies',
       'ngResource',
       'ngSanitize',
+      'ngCordova',
       'ionic',
+      'uiGmapgoogle-maps',
       'config',
       'glitch',
       'dataServices',
@@ -19,13 +21,18 @@
     .run(allowAccess)
     .run(ionicSetup);
 
-  config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
+  config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', 'uiGmapGoogleMapApiProvider'];
 
-  function config($stateProvider, $urlRouterProvider, $httpProvider) {
+  function config($stateProvider, $urlRouterProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
     $httpProvider.interceptors.push('authInterceptor');
     //$httpProvider.interceptors.push('loadingInterceptor');
+    uiGmapGoogleMapApiProvider.configure({
+      // key: 'your api key',
+      v: '3.17',
+      // libraries: 'visualization'
+    });
   }
 
   allowAccess.$inject = ['$rootScope', '$location', 'Auth', 'glitch'];
