@@ -33,7 +33,10 @@
           latitude: -31.9546529,
           longitude: 115.852662
         },
-        zoom: 10
+        zoom: 10,
+        options: {
+          disableDefaultUI: true
+        }
       };
       mapToLocation();
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits

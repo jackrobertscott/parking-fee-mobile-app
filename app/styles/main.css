@@ -2,6 +2,18 @@
 CSS
 */
 
+.scroll {
+  height: 100%;
+}
+.fixed-bottom {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
 .angular-google-map-container {
-  height: 400px;
+  position: fixed !important;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

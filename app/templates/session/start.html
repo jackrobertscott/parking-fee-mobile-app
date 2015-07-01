@@ -2,28 +2,27 @@
   <ion-nav-buttons side="left">
     <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
   </ion-nav-buttons>
-  <ion-content>
-    <form ng-submit="vm.startSession()">
-      <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom" data-tap-disable="true">
-        <ui-gmap-markers models="vm.locations" coords="'self'" idKey="'_id'" click="vm.markerClick()"></ui-gmap-markers>
-      </ui-gmap-google-map>
-      <div class="padding">
-        <div class="list">
-          <label class="item item-input item-select" ng-init="vm.getUserVehicles()">
-            <div class="input-label">Vehicle</div>
-            <select ng-model="vm.session.vehicle" ng-options="vehicle.plate for vehicle in vm.vehicles"></select>
-          </label>
-          <label class="item item-input item-select" ng-init="vm.getLocations()">
-            <div class="input-label">Location</div>
-            <select ng-model="vm.session.location" ng-options="(location.address + ' ' + location.suburb) for location in vm.locations"></select>
-          </label>
-          <label class="item item-input item-select">
-            <div class="input-label">Safety Limit</div>
-            <select ng-model="vm.session.time" ng-options="time.value as time.label for time in vm.times"></select>
-          </label>
-        </div>
-        <button class="button button-block button-positive" type="submit">Start</button>
+  <ion-content></ion-content>
+  <form ng-submit="vm.startSession()">
+    <ui-gmap-google-map center="vm.map.center" zoom="vm.map.zoom" data-tap-disable="true" options="vm.map.options">
+      <ui-gmap-markers models="vm.locations" coords="'self'" idKey="'_id'" click="vm.markerClick()"></ui-gmap-markers>
+    </ui-gmap-google-map>
+    <div class="padding fixed-bottom">
+      <div class="list">
+        <label class="item item-input item-select" ng-init="vm.getUserVehicles()">
+          <div class="input-label">Vehicle</div>
+          <select ng-model="vm.session.vehicle" ng-options="vehicle.plate for vehicle in vm.vehicles"></select>
+        </label>
+        <label class="item item-input item-select" ng-init="vm.getLocations()">
+          <div class="input-label">Location</div>
+          <select ng-model="vm.session.location" ng-options="(location.address + ' ' + location.suburb) for location in vm.locations"></select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">Safety Limit</div>
+          <select ng-model="vm.session.time" ng-options="time.value as time.label for time in vm.times"></select>
+        </label>
       </div>
-    </form>
-  </ion-content>
+      <button class="button button-block button-positive" type="submit">Start</button>
+    </div>
+  </form>
 </ion-view>
