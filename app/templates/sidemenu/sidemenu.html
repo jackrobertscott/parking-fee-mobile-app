@@ -14,7 +14,8 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-repeat="item in vmMenu.sidemenu" ui-sref="{{ item.direction }}">
+        <ion-item menu-close class="item-icon-left" ng-repeat="item in vmMenu.sidemenu" ui-sref="{{ item.direction }}">
+          <i class="icon {{ item.data.icon }}"></i>
           {{ item.label }}
         </ion-item>
       </ion-list>

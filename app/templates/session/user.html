@@ -8,6 +8,7 @@
         <p><strong>Location:</strong> {{ session.location.address }} {{ session.location.suburb }}</p>
         <p><strong>Payment:</strong> {{ session.payment | currency }}</p>
       </a>
+      <div class="item" ng-if="!vm.sessions.length">No sessions</div>
     </div>
   </ion-content>
 </ion-view>

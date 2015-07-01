@@ -10,6 +10,7 @@
         <p><strong>Type:</strong> {{ vehicle.type }}</p>
         <p><strong>Colour:</strong> {{ vehicle.color }}</p>
       </a>
+      <div class="item" ng-if="!vm.vehicles.length">No vehicles</div>
     </div>
   </ion-content>
 </ion-view>
