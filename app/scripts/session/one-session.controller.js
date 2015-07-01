@@ -5,9 +5,9 @@
     .module('mobileApp')
     .controller('OneSessionCtrl', OneSessionCtrl);
 
-  OneSessionCtrl.$inject = ['dataSession', 'glitch', 'Auth', '$state', '$stateParams', 'dataVehicle', 'dataLocation', '$ionicPlatform', '$cordovaGeolocation'];
+  OneSessionCtrl.$inject = ['dataSession', 'glitch', 'Auth', '$state', '$stateParams', 'dataVehicle', 'dataLocation', '$ionicPlatform', '$cordovaGeolocation', '$window'];
 
-  function OneSessionCtrl(dataSession, glitch, Auth, $state, $stateParams, dataVehicle, dataLocation, $ionicPlatform, $cordovaGeolocation) {
+  function OneSessionCtrl(dataSession, glitch, Auth, $state, $stateParams, dataVehicle, dataLocation, $ionicPlatform, $cordovaGeolocation, $window) {
     var vm = this;
 
     vm.session = {};
@@ -28,14 +28,20 @@
     activate();
 
     function activate() {
-      vm.map = {
-        center: {
-          latitude: -31.9546529,
-          longitude: 115.852662
-        },
-        zoom: 10
-      };
-      mapToLocation();
+      if ($window.localStorage['currentSession']) {
+        $state.go('app.sessionEnd', {
+          id: $window.localStorage['currentSession']
+        });
+      } else {
+        vm.map = {
+          center: {
+            latitude: -31.9546529,
+            longitude: 115.852662
+          },
+          zoom: 10
+        };
+        mapToLocation();
+      }
       for (var i = 1; i <= 24; i++) { // need to make sure not longer than limits
         vm.times.push({
           label: String(i * 30 + ' mins'),
@@ -52,6 +58,10 @@
       dataSession.getOne(id)
         .then(function(session) {
           vm.session = session;
+          vm.map.center = {
+            latitude: session.latitude,
+            longitude: session.longitude
+          };
         })
         .catch(vm.glitch.handle);
     }
@@ -92,6 +102,7 @@
         };
         dataSession.create(session)
           .then(function(session) {
+            $window.localStorage['currentSession'] = session._id;
             $state.go('app.sessionEnd', {
               id: session._id
             });
@@ -109,6 +120,7 @@
           payment: vm.session.location.rate * hours,
         })
         .then(function(session) {
+          delete $window.localStorage['currentSession'];
           $state.go('app.sessionStart', {
             id: session._id
           });
