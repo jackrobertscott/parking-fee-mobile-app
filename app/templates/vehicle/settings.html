@@ -1,28 +1,28 @@
 <ion-view view-title="Update">
   <ion-content>
     <form ng-init="vm.getOne()" ng-submit="vm.update()">
-      <div class="list">
-        <label class="item item-input">
-          <input ng-model="vm.vehicle.plate" placeholder="Registration Number" type="text">
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">Make</div>
-          <select ng-model="vm.vehicle.make" ng-options="make for make in vm.makes"></select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">Type</div>
-          <select ng-model="vm.vehicle.type" ng-options="type for type in vm.types"></select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">Colour</div>
-          <select ng-model="vm.vehicle.color" ng-options="color for color in vm.colors"></select>
-        </label>
-        <label class="item item-input">
-          <textarea ng-model="vm.vehicle.info" placeholder="Other Information"></textarea>
-        </label>
-      </div>
       <div class="padding">
-        <button class="button button-block button-positive" type="submit">Save</button>
+        <div class="list">
+          <label class="item item-input">
+            <input ng-model="vm.vehicle.plate" placeholder="Registration Number" type="text">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">Make</div>
+            <select ng-model="vm.vehicle.make" ng-options="make for make in vm.makes"></select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">Type</div>
+            <select ng-model="vm.vehicle.type" ng-options="type for type in vm.types"></select>
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">Colour</div>
+            <select ng-model="vm.vehicle.color" ng-options="color for color in vm.colors"></select>
+          </label>
+          <label class="item item-input">
+            <textarea ng-model="vm.vehicle.info" placeholder="Other Information"></textarea>
+          </label>
+        </div>
+        <button class="button button-block button-positive" type="submit">Register</button>
       </div>
     </form>
   </ion-content>

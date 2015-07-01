@@ -3,18 +3,18 @@
 </div>
 <ion-content class="has-header">
   <form ng-submit="vm.create()">
-    <div class="list">
-      <label class="item item-input">
-        <input ng-model="vm.user.name" placeholder="Name" type="text">
-      </label>
-      <label class="item item-input">
-        <input ng-model="vm.user.email" placeholder="Email" type="email">
-      </label>
-      <label class="item item-input">
-        <input ng-model="vm.user.password" placeholder="Password" type="password">
-      </label>
-    </div>
     <div class="padding">
+      <div class="list">
+        <label class="item item-input">
+          <input ng-model="vm.user.name" placeholder="Name" type="text">
+        </label>
+        <label class="item item-input">
+          <input ng-model="vm.user.email" placeholder="Email" type="email">
+        </label>
+        <label class="item item-input">
+          <input ng-model="vm.user.password" placeholder="Password" type="password">
+        </label>
+      </div>
       <button class="button button-block button-positive" type="submit">Sign up</button>
       <a class="button button-block button-clear button-positive" ui-sref="login">Login</a>
     </div>

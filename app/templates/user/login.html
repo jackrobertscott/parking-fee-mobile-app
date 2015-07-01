@@ -3,16 +3,17 @@
 </div>
 <ion-content class="has-header">
   <form ng-submit="vm.login()">
-    <div class="list">
-      <label class="item item-input">
-        <input ng-model="vm.user.email" placeholder="Email" type="email">
-      </label>
-      <label class="item item-input">
-        <input ng-model="vm.user.password" placeholder="Password" type="password">
-      </label>
-    </div>
     <div class="padding">
-      <button class="button button-block button-positive" type="submit">Login</button>
+      <div class="list">
+        <label class="item item-input">
+          <input ng-model="vm.user.email" placeholder="Email" type="email">
+        </label>
+        <label class="item item-input">
+          <input ng-model="vm.user.password" placeholder="Password" type="password">
+        </label>
+      </div>
+      <button class="button button-block button-stable" type="submit">Submit</button>
+      <button class="button button-block button-positive" ng-click="vm.loginFacebook()">Login with Facebook</button>
       <a class="button button-block button-clear button-positive" ui-sref="register">Sign up</a>
     </div>
   </form>

@@ -5,9 +5,9 @@
     .module('mobileApp')
     .controller('OneUserCtrl', OneUserCtrl);
 
-  OneUserCtrl.$inject = ['$state', 'glitch', 'Auth', 'dataUser', '$ionicPopup'];
+  OneUserCtrl.$inject = ['$state', 'glitch', 'Auth', 'dataUser', '$ionicPopup', '$ionicPlatform', '$cordovaOauth'];
 
-  function OneUserCtrl($state, glitch, Auth, dataUser, $ionicPopup) {
+  function OneUserCtrl($state, glitch, Auth, dataUser, $ionicPopup, $ionicPlatform, $cordovaOauth) {
     var vm = this;
 
     vm.user = {};
@@ -18,7 +18,7 @@
     vm.changePassword = changePassword;
     vm.update = update;
     vm.logout = logout;
-    vm.loginOauth = loginOauth;
+    vm.loginFacebook = loginFacebook;
 
     ////////////
 
@@ -83,8 +83,14 @@
       $state.go('login');
     }
 
-    function loginOauth(provider) {
-      Auth.loginOauth(provider);
+    function loginFacebook() {
+      $ionicPlatform.ready(function() {
+        $cordovaOauth.facebook('CLIENT_ID_HERE', ['email']).then(function(result) {
+          // results
+        }, function(error) {
+          // error
+        });
+      });
     }
   }
 })();
