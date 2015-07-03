@@ -76,7 +76,6 @@
       dataLocation.getMany()
         .then(function(locations) {
           vm.locations = locations;
-          vm.session.location = vm.locations[0];
         })
         .catch(vm.glitch.handle);
     }
@@ -144,8 +143,7 @@
     }
 
     function markerClick(marker, event, object) {
-      // Not working atm.. need to add data-tap-disable="true" to map div
-      vm.location = object;
+      vm.session.location = object;
     }
   }
 })();
