@@ -35,7 +35,7 @@ module.exports = function (grunt) {
     ngconstant: {
       options: {
         space: '  ',
-        wrap: '"use strict";\n\n {%= __ngModule %}',
+        wrap: '\'use strict\';\n\n {%= __ngModule %}',
         name: 'config',
         dest: '<%= yeoman.app %>/scripts/config.js'
       },
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'development',
-            apiEndpoint: 'http://localhost:9000/'
+            apiEndpoint: 'http://192.168.0.13:9000/'
           }
         }
       },
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
         constants: {
           ENV: {
             name: 'production',
-            apiEndpoint: 'http://localhost:9000/'
+            apiEndpoint: 'http://192.168.0.13:9000/'
           }
         }
       }
